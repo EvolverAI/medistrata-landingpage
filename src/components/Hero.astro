@@ -1,0 +1,170 @@
+---
+
+---
+
+<div class="hero" id="home">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="title-main">Medi</span>
+            <span class="title-main"
+                >Strata<span class="title-plus">+</span></span
+            >
+        </h1>
+        <p class="hero-tagline">Advanced Medical Data Management & Analytics</p>
+        <p class="hero-description">
+            Transforming healthcare data into actionable insights with
+            enterprise-grade security, seamless integration, and intelligent
+            analytics.
+        </p>
+        <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">Get Started</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 4rem 2rem 4rem;
+        position: relative;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+                circle at 20% 50%,
+                rgba(0, 102, 204, 0.03) 0%,
+                transparent 50%
+            ),
+            radial-gradient(
+                circle at 80% 80%,
+                rgba(0, 102, 204, 0.02) 0%,
+                transparent 50%
+            );
+        pointer-events: none;
+    }
+
+    .hero-content {
+        max-width: 900px;
+        text-align: left;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-title {
+        font-size: 20rem;
+        font-weight: 500;
+        margin: 0 0 1.5rem 0;
+        letter-spacing: -0.1em;
+        line-height: 1.1;
+    }
+
+    .title-main {
+        display: inline;
+    }
+
+    .title-plus {
+        font-weight: 700;
+        color: #0066cc;
+        margin-left: 0.15em;
+    }
+
+    .hero-tagline {
+        font-size: 1.75rem;
+        font-weight: 400;
+        color: #333;
+        margin: 0 0 1.5rem 0;
+        letter-spacing: -0.01em;
+    }
+
+    .hero-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        color: #666;
+        margin: 0 0 3rem 0;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-cta {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: inline-block;
+        border: 2px solid transparent;
+    }
+
+    .btn-primary {
+        background: #0066cc;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: #0052a3;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: #0066cc;
+        border-color: #0066cc;
+    }
+
+    .btn-secondary:hover {
+        background: #0066cc;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            min-height: 90vh;
+            padding: 6rem 1.5rem 3rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+        }
+
+        .hero-description {
+            font-size: 1.0625rem;
+        }
+
+        .hero-cta {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+        }
+    }
+</style>

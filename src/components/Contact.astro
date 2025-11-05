@@ -1,0 +1,253 @@
+---
+
+---
+
+<div class="contact-section" id="contact">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h2 class="contact-title">Get in Touch</h2>
+            <p class="contact-subtitle">
+                Ready to transform your healthcare data management? Contact us
+                today.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:info@medistrata.com" class="contact-link"
+                    >info@medistrata.com</a
+                >
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Phone</h3>
+                <a href="tel:+1234567890" class="contact-link"
+                    >+1 (234) 567-890</a
+                >
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <h3>Address</h3>
+                <p class="contact-text">
+                    Healthcare Innovation Hub<br />123 Medical Plaza<br />San
+                    Francisco, CA 94105
+                </p>
+            </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization">Organization</label>
+                    <input type="text" id="organization" name="organization" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .contact-section {
+        padding: 7rem 2rem;
+        background: #ffffff;
+    }
+
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .contact-title {
+        font-size: 2.75rem;
+        font-weight: 300;
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.02em;
+    }
+
+    .contact-subtitle {
+        font-size: 1.25rem;
+        color: #666;
+        margin: 0;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .contact-card {
+        text-align: center;
+        padding: 2rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+    }
+
+    .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0 0 0.75rem 0;
+        color: #000;
+    }
+
+    .contact-link {
+        color: #0066cc;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+        color: #0052a3;
+        text-decoration: underline;
+    }
+
+    .contact-text {
+        color: #555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .contact-form-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .contact-form {
+        background: #f8f9fa;
+        padding: 3rem;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-size: 0.9375rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        background: #0066cc;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background: #0052a3;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .contact-section {
+            padding: 4rem 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.125rem;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .contact-form {
+            padding: 2rem 1.5rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+    }
+</style>

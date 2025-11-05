@@ -1,0 +1,164 @@
+---
+interface Props {
+    id?: string;
+    title?: string;
+    subtitle?: string;
+    background?: "white" | "light" | "dark";
+    centered?: boolean;
+    paddingTop?: "small" | "medium" | "large";
+    paddingBottom?: "small" | "medium" | "large";
+}
+
+const {
+    id,
+    title,
+    subtitle,
+    background = "white",
+    centered = false,
+    paddingTop = "large",
+    paddingBottom = "large",
+} = Astro.props;
+
+const paddingClasses = `pt-${paddingTop} pb-${paddingBottom}`;
+const bgClass = `bg-${background}`;
+const textAlign = centered ? "centered" : "";
+---
+
+<section id={id} class={`section ${bgClass} ${paddingClasses} ${textAlign}`}>
+    <div class="container">
+        {
+            (title || subtitle) && (
+                <div class="section-header">
+                    {title && <h2 class="section-title">{title}</h2>}
+                    {subtitle && <p class="section-subtitle">{subtitle}</p>}
+                </div>
+            )
+        }
+        <div class="section-content">
+            <slot />
+        </div>
+    </div>
+</section>
+
+<style>
+    .section {
+        width: 100%;
+    }
+
+    .bg-white {
+        background: #ffffff;
+    }
+
+    .bg-light {
+        background: #f8f9fa;
+    }
+
+    .bg-dark {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .pt-small {
+        padding-top: 3rem;
+    }
+
+    .pt-medium {
+        padding-top: 5rem;
+    }
+
+    .pt-large {
+        padding-top: 7rem;
+    }
+
+    .pb-small {
+        padding-bottom: 3rem;
+    }
+
+    .pb-medium {
+        padding-bottom: 5rem;
+    }
+
+    .pb-large {
+        padding-bottom: 7rem;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 3rem;
+    }
+
+    .centered .section-header {
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 8rem;
+        font-weight: 600;
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+    }
+
+    .section-subtitle {
+        font-size: 1.25rem;
+        color: #666;
+        margin: 0;
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    .bg-dark .section-subtitle {
+        color: #ccc;
+    }
+
+    .section-content {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .pt-small {
+            padding-top: 2rem;
+        }
+
+        .pt-medium {
+            padding-top: 3rem;
+        }
+
+        .pt-large {
+            padding-top: 4rem;
+        }
+
+        .pb-small {
+            padding-bottom: 2rem;
+        }
+
+        .pb-medium {
+            padding-bottom: 3rem;
+        }
+
+        .pb-large {
+            padding-bottom: 4rem;
+        }
+
+        .container {
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+    }
+</style>
