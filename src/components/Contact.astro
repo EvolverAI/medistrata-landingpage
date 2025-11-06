@@ -64,7 +64,9 @@
                     ></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="submit" class="btn btn-primary"
+                    >Send Message</button
+                >
             </form>
         </div>
     </div>
@@ -87,15 +89,15 @@
     }
 
     .contact-title {
-        font-size: 2.75rem;
-        font-weight: 300;
-        margin: 0 0 1rem 0;
+        font-size: clamp(2rem, 4.5vw, 2.75rem);
+        font-weight: 700;
+        margin: 0 0 0.75rem 0;
         letter-spacing: -0.02em;
     }
 
     .contact-subtitle {
-        font-size: 1.25rem;
-        color: #666;
+        font-size: 1.125rem;
+        color: var(--muted);
         margin: 0;
     }
 
@@ -109,13 +111,14 @@
     .contact-card {
         text-align: center;
         padding: 2rem;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        transition: all 0.25s ease;
+        background: #fff;
     }
 
     .contact-card:hover {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow);
         transform: translateY(-3px);
     }
 
@@ -125,27 +128,26 @@
     }
 
     .contact-card h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0 0 0.75rem 0;
-        color: #000;
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        color: var(--text);
     }
 
     .contact-link {
-        color: #0066cc;
+        color: var(--accent);
         text-decoration: none;
         font-size: 1rem;
-        font-weight: 500;
-        transition: color 0.3s ease;
+        font-weight: 600;
+        transition: color 0.2s ease;
     }
-
     .contact-link:hover {
-        color: #0052a3;
+        color: var(--accent-ink);
         text-decoration: underline;
     }
 
     .contact-text {
-        color: #555;
+        color: var(--muted);
         font-size: 1rem;
         line-height: 1.6;
         margin: 0;
@@ -157,10 +159,10 @@
     }
 
     .contact-form {
-        background: #f8f9fa;
-        padding: 3rem;
-        border-radius: 12px;
-        border: 1px solid #e5e7eb;
+        background: #f7f9fc;
+        padding: 2rem;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
     }
 
     .form-row {
@@ -177,50 +179,23 @@
         display: block;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: #333;
+        color: color-mix(in srgb, var(--text) 85%, #333);
         font-size: 0.9375rem;
     }
 
     .form-group input,
     .form-group textarea {
         width: 100%;
-        padding: 0.875rem 1rem;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        font-size: 1rem;
         font-family: inherit;
-        transition: all 0.3s ease;
-        background: #ffffff;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: #0066cc;
-        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
     }
 
     .form-group textarea {
         resize: vertical;
     }
 
-    .btn-submit {
+    .btn {
         width: 100%;
-        padding: 1rem 2rem;
-        font-size: 1.125rem;
-        font-weight: 600;
-        background: #0066cc;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn-submit:hover {
-        background: #0052a3;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        justify-content: center;
     }
 
     @media (max-width: 768px) {
@@ -242,7 +217,7 @@
         }
 
         .contact-form {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
         }
 
         .form-row {

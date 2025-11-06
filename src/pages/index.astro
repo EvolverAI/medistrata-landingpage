@@ -5,15 +5,24 @@ import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import Contact from "../components/Contact.astro";
+import medistrataIntro from "../assets/medistrata-intro.png";
 ---
 
 <Layout>
 	<Navigation />
 	<Hero />
 
-	<!-- About Section -->
-	<Section id="about" title="Introduction" centered={true}>
-		<div class="about-content">
+	<!-- Introduction Section -->
+	<Section
+		id="introduction"
+		title="Introduction"
+		titleAlignment="top-left"
+		centered={true}
+		image={medistrataIntro.src}
+		imagePosition="left"
+		imageSize="640px"
+	>
+		<div class="introduction-content">
 			<p class="lead-text">
 				Every day, clinics spend valuable time navigating multiple
 				systems to find essential patient information. MediStrata
@@ -25,6 +34,87 @@ import Contact from "../components/Contact.astro";
 				save time, increase accuracy, and automate routine documentation
 				— allowing clinicians to focus on what truly counts: the
 				patient.
+			</p>
+		</div>
+	</Section>
+
+	<!-- AboutUs Section -->
+	<Section
+		id="about-us"
+		title="About Us"
+		titleAlignment="top-right"
+		centered={true}
+		image={medistrataIntro.src}
+		imagePosition="right"
+		imageSize="640px"
+	>
+		<div class="introduction-content">
+			<p class="lead-text">
+				MediStrata was founded by a team of technology and operations
+				leaders with a long track record in data management, automation,
+				and process efficiency across complex global environments.
+			</p>
+			<p class="lead-text">
+				We bring this experience to healthcare — transforming fragmented
+				patient information into clear, actionable intelligence that
+				supports faster, more accurate clinical and administrative work.
+			</p>
+		</div>
+	</Section>
+
+	<!-- Vision Section -->
+	<Section
+		id="vision"
+		title="Vision"
+		titleAlignment="left"
+		centered={true}
+		image={medistrataIntro.src}
+		imagePosition="right"
+		imageSize="640px"
+	>
+		<div class="vision-content">
+			<p class="lead-text">
+				We envision a healthcare world where data works seamlessly for
+				people — not the other way around. A world where every
+				clinician, nurse, and administrator can instantly access the
+				information they need, in context, with clarity.
+			</p>
+			<p class="lead-text">
+				At MediStrata, we believe that by transforming how medical data
+				is organized, understood, and used, we can make care faster,
+				more accurate, and profoundly more human.
+			</p>
+		</div>
+	</Section>
+
+	<!-- Mission Section -->
+	<Section
+		id="mission"
+		title="Mission"
+		titleAlignment="right"
+		centered={true}
+		image={medistrataIntro.src}
+		imagePosition="right"
+		imageSize="640px"
+	>
+		<div class="mission-content">
+			<p class="lead-text">
+				Our mission is to make healthcare operations as intelligent and
+				efficient as the data that powers them — helping clinicians and
+				staff focus their time where it matters most: on care.
+			</p>
+			<p class="lead-text">
+				Healthcare professionals are surrounded by data but short on
+				time. MediStrata automates the complexity behind clinical
+				information, transforming scattered inputs into clear,
+				structured insight. By reducing administrative burden and
+				accelerating decision-making, we give clinicians more time to
+				focus on care — improving both outcomes and efficiency.
+			</p>
+			<p class="lead-text">
+				Through intelligent data management and user-centric design, we
+				aim to revolutionize healthcare operations — making them faster,
+				simpler, and more effective for everyone involved.
 			</p>
 		</div>
 	</Section>
@@ -218,23 +308,23 @@ import Contact from "../components/Contact.astro";
 	}
 
 	.lead-text {
-		font-size: 2rem;
-		line-height: 1.8;
-		color: #444;
-		margin-bottom: 1.5rem;
+		font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+		line-height: 1.75;
+		color: var(--muted);
+		margin-bottom: 1.25rem;
 	}
 
 	.features-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
 		margin-top: 2rem;
 	}
 
 	.benefits-list {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-		gap: 2.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 2rem;
 		margin-top: 2rem;
 	}
 
@@ -245,25 +335,25 @@ import Contact from "../components/Contact.astro";
 	}
 
 	.benefit-number {
-		font-size: 2.5rem;
-		font-weight: 700;
-		color: #0066cc;
-		opacity: 0.3;
+		font-size: 2rem;
+		font-weight: 800;
+		color: var(--accent);
+		opacity: 0.28;
 		line-height: 1;
 		flex-shrink: 0;
 	}
 
 	.benefit-content h3 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin: 0 0 0.75rem 0;
-		color: #000;
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin: 0 0 0.5rem 0;
+		color: var(--text);
 	}
 
 	.benefit-content p {
-		font-size: 1rem;
+		font-size: 0.98rem;
 		line-height: 1.7;
-		color: #555;
+		color: var(--muted);
 		margin: 0;
 	}
 
@@ -279,11 +369,12 @@ import Contact from "../components/Contact.astro";
 	}
 
 	.tech-category h3 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin: 0 0 1.5rem 0;
-		color: #000;
+		font-size: 1.125rem;
+		font-weight: 800;
+		margin: 0 0 1rem 0;
+		color: var(--text);
 		text-align: center;
+		letter-spacing: 0.01em;
 	}
 
 	.tech-category ul {
@@ -293,10 +384,10 @@ import Contact from "../components/Contact.astro";
 	}
 
 	.tech-category li {
-		padding: 0.75rem 0;
-		color: #555;
-		font-size: 1rem;
-		border-bottom: 1px solid #e5e7eb;
+		padding: 0.625rem 0;
+		color: var(--muted);
+		font-size: 0.98rem;
+		border-bottom: 1px solid var(--line);
 	}
 
 	.tech-category li:last-child {
@@ -305,13 +396,13 @@ import Contact from "../components/Contact.astro";
 
 	.tech-category li::before {
 		content: "✓";
-		color: #0066cc;
-		font-weight: 700;
-		margin-right: 0.75rem;
+		color: var(--accent);
+		font-weight: 800;
+		margin-right: 0.6rem;
 	}
 
 	.footer {
-		background: #1a1a1a;
+		background: #0f1113;
 		color: #ffffff;
 		padding: 3rem 2rem;
 		text-align: center;

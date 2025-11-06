@@ -2,15 +2,18 @@
 
 ---
 
-<div class="hero" id="home">
+<div class="hero grid-ambient" id="home">
     <div class="hero-content">
-        <h1 class="hero-title">
+        <p class="kicker">Advanced Medical Data Platform</p>
+        <h1 class="hero-title display-1">
             <span class="title-main">Medi</span>
-            <span class="title-main"
-                >Strata<span class="title-plus">+</span></span
+            <span class="title-main">Strata</span><span class="title-plus"
+                >+</span
             >
         </h1>
-        <p class="hero-tagline">Advanced Medical Data Management & Analytics</p>
+        <p class="hero-tagline">
+            Medical data management & intelligent analytics
+        </p>
         <p class="hero-description">
             Transforming healthcare data into actionable insights with
             enterprise-grade security, seamless integration, and intelligent
@@ -18,153 +21,105 @@
         </p>
         <div class="hero-cta">
             <a href="#contact" class="btn btn-primary">Get Started</a>
-            <a href="#features" class="btn btn-secondary">Learn More</a>
+            <a href="#features" class="btn btn-outline">Learn More</a>
         </div>
     </div>
 </div>
 
 <style>
     .hero {
-        min-height: 100vh;
+        min-height: 90vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        padding: 4rem 2rem 4rem;
+        background: linear-gradient(180deg, #ffffff 0%, #fafcff 100%);
+        padding: 7rem 2rem 4rem;
         position: relative;
     }
 
     .hero::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         background: radial-gradient(
-                circle at 20% 50%,
-                rgba(0, 102, 204, 0.03) 0%,
-                transparent 50%
+                800px 400px at 80% 15%,
+                color-mix(in srgb, var(--accent) 7%, transparent),
+                transparent 60%
             ),
             radial-gradient(
-                circle at 80% 80%,
-                rgba(0, 102, 204, 0.02) 0%,
-                transparent 50%
+                1000px 500px at 10% 40%,
+                color-mix(in srgb, var(--accent) 6%, transparent),
+                transparent 65%
             );
         pointer-events: none;
     }
 
     .hero-content {
-        max-width: 900px;
-        text-align: left;
+        max-width: 980px;
+        text-align: center;
         position: relative;
         z-index: 1;
     }
 
     .hero-title {
-        font-size: 20rem;
-        font-weight: 500;
-        margin: 0 0 1.5rem 0;
-        letter-spacing: -0.1em;
-        line-height: 1.1;
+        margin: 0.25rem 0 1rem 0;
     }
 
     .title-main {
         display: inline;
+        margin-right: 0.1rem;
     }
 
     .title-plus {
-        font-weight: 700;
-        color: #0066cc;
-        margin-left: 0.15em;
+        font-weight: 800;
+        color: var(--accent);
+        margin-left: 0.2rem;
+        text-shadow: 0 0 0 rgba(10, 132, 255, 0);
     }
 
     .hero-tagline {
-        font-size: 1.75rem;
-        font-weight: 400;
-        color: #333;
-        margin: 0 0 1.5rem 0;
+        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        font-weight: 600;
+        color: color-mix(in srgb, var(--text) 85%, #444);
+        margin: 0.25rem 0 1.25rem 0;
         letter-spacing: -0.01em;
     }
 
     .hero-description {
-        font-size: 1.25rem;
-        line-height: 1.7;
-        color: #666;
-        margin: 0 0 3rem 0;
-        max-width: 700px;
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        line-height: 1.75;
+        color: var(--muted);
+        margin: 0 0 2rem 0;
+        max-width: 720px;
         margin-left: auto;
         margin-right: auto;
     }
 
     .hero-cta {
         display: flex;
-        gap: 1.5rem;
+        gap: 0.9rem;
         justify-content: center;
         flex-wrap: wrap;
     }
 
-    .btn {
-        padding: 1rem 2.5rem;
-        font-size: 1.125rem;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        display: inline-block;
-        border: 2px solid transparent;
-    }
-
-    .btn-primary {
-        background: #0066cc;
-        color: #ffffff;
-    }
-
-    .btn-primary:hover {
-        background: #0052a3;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
-    }
-
-    .btn-secondary {
-        background: transparent;
-        color: #0066cc;
-        border-color: #0066cc;
-    }
-
-    .btn-secondary:hover {
-        background: #0066cc;
-        color: #ffffff;
-        transform: translateY(-2px);
-    }
-
     @media (max-width: 768px) {
         .hero {
-            min-height: 90vh;
-            padding: 6rem 1.5rem 3rem;
-        }
-
-        .hero-title {
-            font-size: 3rem;
+            min-height: 84vh;
+            padding: 6rem 1.25rem 3rem;
         }
 
         .hero-tagline {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
         }
 
         .hero-description {
-            font-size: 1.0625rem;
+            font-size: 1rem;
         }
 
         .hero-cta {
             flex-direction: column;
             align-items: stretch;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.875rem 2rem;
-            font-size: 1rem;
+            gap: 0.75rem;
         }
     }
 </style>

@@ -7,6 +7,10 @@ interface Props {
     centered?: boolean;
     paddingTop?: "small" | "medium" | "large";
     paddingBottom?: "small" | "medium" | "large";
+    image?: string;
+    imagePosition?: "left" | "right" | "top" | "bottom";
+    imageSize?: string;
+    titleAlignment?: "top-left" | "top-center" | "top-right" | "left" | "right";
 }
 
 const {
@@ -17,25 +21,90 @@ const {
     centered = false,
     paddingTop = "large",
     paddingBottom = "large",
+    image,
+    imagePosition = "right",
+    imageSize = "300px",
+    titleAlignment = "top-center",
 } = Astro.props;
 
 const paddingClasses = `pt-${paddingTop} pb-${paddingBottom}`;
 const bgClass = `bg-${background}`;
 const textAlign = centered ? "centered" : "";
+const titleAlignClass = title ? `title-${titleAlignment}` : "";
 ---
 
-<section id={id} class={`section ${bgClass} ${paddingClasses} ${textAlign}`}>
+<section
+    id={id}
+    class={`section ${bgClass} ${paddingClasses} ${textAlign} ${titleAlignClass}`}
+>
     <div class="container">
+        {/* Top-aligned title: full width above everything */}
         {
-            (title || subtitle) && (
-                <div class="section-header">
-                    {title && <h2 class="section-title">{title}</h2>}
-                    {subtitle && <p class="section-subtitle">{subtitle}</p>}
-                </div>
-            )
+            title &&
+                (titleAlignment === "top-left" ||
+                    titleAlignment === "top-center" ||
+                    titleAlignment === "top-right") && (
+                    <div class="section-header top-title">
+                        <h2 class="section-title">{title}</h2>
+                        {subtitle && <p class="section-subtitle">{subtitle}</p>}
+                    </div>
+                )
         }
-        <div class="section-content">
-            <slot />
+
+        {/* Side-aligned title: create horizontal layout */}
+        <div
+            class={`main-content ${titleAlignment === "left" || titleAlignment === "right" ? "has-side-title" : ""}`}
+        >
+            {/* Left side title */}
+            {
+                title && titleAlignment === "left" && (
+                    <div class="side-title left-title">
+                        <h2 class="section-title">{title}</h2>
+                    </div>
+                )
+            }
+
+            {/* Content and image area */}
+            <div class="content-wrapper">
+                {
+                    image ? (
+                        <div class={`content-row image-${imagePosition}`}>
+                            {imagePosition === "left" && (
+                                <img
+                                    src={image}
+                                    alt=""
+                                    class="section-image"
+                                    style={`width: ${imageSize}; height: auto;`}
+                                />
+                            )}
+                            <div class="section-content">
+                                <slot />
+                            </div>
+                            {imagePosition === "right" && (
+                                <img
+                                    src={image}
+                                    alt=""
+                                    class="section-image"
+                                    style={`width: ${imageSize}; height: auto;`}
+                                />
+                            )}
+                        </div>
+                    ) : (
+                        <div class="section-content">
+                            <slot />
+                        </div>
+                    )
+                }
+            </div>
+
+            {/* Right side title */}
+            {
+                title && titleAlignment === "right" && (
+                    <div class="side-title right-title">
+                        <h2 class="section-title">{title}</h2>
+                    </div>
+                )
+            }
         </div>
     </div>
 </section>
@@ -43,16 +112,49 @@ const textAlign = centered ? "centered" : "";
 <style>
     .section {
         width: 100%;
+        position: relative;
+    }
+
+    .section::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0, 102, 204, 0.1) 10%,
+            rgba(0, 102, 204, 0.3) 50%,
+            rgba(0, 102, 204, 0.1) 90%,
+            transparent 100%
+        );
+    }
+
+    .section::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0, 102, 204, 0.6) 50%,
+            transparent 100%
+        );
+        box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
     }
 
     .bg-white {
         background: #ffffff;
     }
-
     .bg-light {
         background: #f8f9fa;
     }
-
     .bg-dark {
         background: #1a1a1a;
         color: #ffffff;
@@ -83,7 +185,7 @@ const textAlign = centered ? "centered" : "";
     }
 
     .container {
-        max-width: 1400px;
+        max-width: var(--container);
         margin: 0 auto;
         padding: 0 2rem;
     }
@@ -96,20 +198,88 @@ const textAlign = centered ? "centered" : "";
         text-align: center;
     }
 
-    .section-title {
+    /* Top title alignments */
+    .title-top-left .section-header.top-title {
+        text-align: left;
+    }
+
+    .title-top-center .section-header.top-title {
+        text-align: center;
+    }
+
+    .title-top-right .section-header.top-title {
+        text-align: right;
+    }
+
+    /* Main content area layout */
+    .main-content {
+        width: 100%;
+    }
+
+    .main-content.has-side-title {
+        display: flex;
+        align-items: stretch;
+        gap: 3rem;
+    }
+
+    /* Side titles (rotated 90 degrees) */
+    .side-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .side-title .section-title {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        white-space: nowrap;
+        margin: 0;
         font-size: 8rem;
         font-weight: 600;
-        margin: 0 0 1rem 0;
         letter-spacing: -0.02em;
-        line-height: 1.2;
+    }
+
+    .left-title .section-title {
+        transform: rotate(180deg);
+    }
+
+    /* Content wrapper */
+    .content-wrapper {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    /* Content row with image */
+    .content-row {
+        display: grid;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .content-row.image-left {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .content-row.image-right {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 7vw, 4rem);
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
     }
 
     .section-subtitle {
-        font-size: 1.25rem;
-        color: #666;
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        color: var(--muted);
         margin: 0;
         line-height: 1.6;
-        font-weight: 400;
+        font-weight: 500;
     }
 
     .bg-dark .section-subtitle {
@@ -118,6 +288,15 @@ const textAlign = centered ? "centered" : "";
 
     .section-content {
         width: 100%;
+        min-width: 0;
+        overflow-wrap: break-word;
+    }
+
+    .section-image {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
@@ -150,15 +329,37 @@ const textAlign = centered ? "centered" : "";
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
         }
-
         .section-subtitle {
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
 
         .section-header {
             margin-bottom: 2rem;
+        }
+
+        /* Reset side titles on mobile */
+        .main-content.has-side-title {
+            display: block;
+        }
+
+        .side-title .section-title {
+            writing-mode: horizontal-tb;
+            transform: none;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Hide images on mobile for better UX */
+        .section-image {
+            display: none;
+        }
+
+        /* Reset grid layout on mobile */
+        .content-row {
+            display: block !important;
         }
     }
 </style>
