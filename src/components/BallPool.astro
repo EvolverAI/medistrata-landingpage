@@ -1,0 +1,676 @@
+---
+// Founder images are served from `public/founders` for simpler client usage
+const founders = [
+    { name: "Franc", img: "/founders/Franc-Square-640.png" },
+    { name: "Gabriele", img: "/founders/Gabriele-Square-640.png" },
+    { name: "Nicola", img: "/founders/Nicola-Square-640.png" },
+];
+
+const shinyPalettes = [
+    ["#f97316", "#fb923c"],
+    ["#06b6d4", "#67e8f9"],
+    ["#8b5cf6", "#a78bfa"],
+];
+---
+
+<!-- A physics-based draggable badge / ball pool.
+     Uses an HTML canvas and a small physics loop to allow dragging
+     and throwing 50 random word chips. Client-side only. -->
+<div class="ballpool-wrapper">
+    <canvas
+        id="ballpool-canvas"
+        aria-label="Interactive word pool"
+        data-founders={JSON.stringify(founders)}
+        data-shiny={JSON.stringify(shinyPalettes)}></canvas>
+</div>
+
+<style>
+    .ballpool-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        height: 420px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.02),
+            rgba(0, 0, 0, 0.02)
+        );
+        box-shadow: 0 8px 30px rgba(10, 10, 10, 0.06);
+        display: block;
+    }
+
+    .ballpool-wrapper canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+</style>
+
+<script type="module">
+    // Read injected founder data and palettes from canvas data attributes
+    const canvas = document.getElementById("ballpool-canvas");
+    if (!canvas) {
+        throw new Error("BallPool canvas not found");
+    }
+    const FOUNDERS = JSON.parse(canvas.dataset.founders || "[]");
+    const SHINY = JSON.parse(canvas.dataset.shiny || "[]");
+
+    // Minimal, dependency-free physics + drag/throw implementation
+    const words = [
+        "pulse",
+        "clinic",
+        "chart",
+        "vital",
+        "triage",
+        "secure",
+        "sync",
+        "nurse",
+        "claim",
+        "patient",
+        "report",
+        "insight",
+        "queue",
+        "token",
+        "visit",
+        "measure",
+        "capture",
+        "order",
+        "alert",
+        "review",
+        "flow",
+        "bridge",
+        "assemble",
+        "recover",
+        "notify",
+        "archive",
+        "label",
+        "index",
+        "route",
+        "filter",
+        "sample",
+        "mapper",
+        "signal",
+        "scope",
+        "format",
+        "policy",
+        "route",
+        "cache",
+        "domain",
+        "bridge",
+        "trace",
+        "audit",
+        "helper",
+        "adapter",
+        "metric",
+        "enrich",
+        "workflow",
+        "schema",
+        "probe",
+        "assist",
+    ];
+
+    const ctx = canvas.getContext("2d");
+    let DPR = Math.max(1, window.devicePixelRatio || 1);
+
+    function isFiniteNumber(v) {
+        return typeof v === "number" && isFinite(v);
+    }
+
+    function canDrawBall(b) {
+        return (
+            b &&
+            isFiniteNumber(b.x) &&
+            isFiniteNumber(b.y) &&
+            isFiniteNumber(b.w) &&
+            isFiniteNumber(b.h) &&
+            isFiniteNumber(b.r) &&
+            b.w > 2 &&
+            b.h > 2
+        );
+    }
+
+    function resize() {
+        const rect = canvas.getBoundingClientRect();
+        DPR = Math.max(1, window.devicePixelRatio || 1);
+        canvas.width = Math.round(rect.width * DPR);
+        canvas.height = Math.round(rect.height * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+
+    const palette = [
+        "#3b82f6",
+        "#06b6d4",
+        "#f97316",
+        "#ef4444",
+        "#10b981",
+        "#8b5cf6",
+    ];
+
+    // Particle (badge) definition
+    class Ball {
+        constructor(x, y, r, text, color, w, h, img = null, isFounder = false) {
+            this.x = x;
+            this.y = y;
+            this.r = r; // collision radius (capsule radius)
+            this.w = w; // visual width
+            this.h = h; // visual height
+            this.text = text;
+            this.color = color; // string or [c1,c2]
+            this.img = img
+                ? (() => {
+                      const im = new Image();
+                      im.src = img;
+                      return im;
+                  })()
+                : null;
+            this.isFounder = isFounder;
+            this.vx = (Math.random() - 0.5) * 0.6;
+            this.vy = (Math.random() - 0.5) * 0.6;
+            this.angle = (Math.random() - 0.5) * 0.6; // rotation
+            this.av = (Math.random() - 0.5) * 0.02; // angular velocity
+            this.mass = r * r;
+            this.isDragged = false;
+        }
+    }
+
+    let balls = [];
+    const N = 50;
+
+    function initBalls() {
+        // if canvas has zero size (hidden), retry shortly — prevents IndexSizeError
+        if (!canvas.width || !canvas.height) {
+            setTimeout(initBalls, 60);
+            return;
+        }
+
+        balls = [];
+        const W = canvas.width / DPR;
+        const H = canvas.height / DPR;
+        // set a baseline font to measure text width for badge sizing
+        ctx.save();
+        ctx.font = `600 12px system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial`;
+        // first, create founder pills (larger, with image + name)
+        for (let i = 0; i < FOUNDERS.length; i++) {
+            const f = FOUNDERS[i];
+            const name = f.name;
+            const metrics = ctx.measureText(name);
+            const textWidth = metrics.width || name.length * 10;
+            const paddingH = 30;
+            const paddingV = 14;
+            const w = Math.min(W - 20, Math.max(160, textWidth + paddingH));
+            const h = Math.max(48, paddingV * 2);
+            const r = h / 2; // capsule radius equals half height
+            const x = Math.random() * (W - r * 2) + r;
+            const y = Math.random() * (H - r * 2) + r;
+            const color = SHINY[i % SHINY.length];
+            balls.push(new Ball(x, y, r, name, color, w, h, f.img, true));
+        }
+
+        // then fill the rest with word chips
+        for (let i = 0; i < N - FOUNDERS.length; i++) {
+            const text = words[i % words.length];
+            const metrics = ctx.measureText(text);
+            const textWidth = metrics.width || text.length * 8;
+            const paddingH = 18; // horizontal padding
+            const paddingV = 10; // vertical padding
+            const w = Math.min(W - 20, Math.max(48, textWidth + paddingH));
+            const h = Math.max(28, paddingV * 2);
+            const r = Math.max(h / 2, w / 4); // collision radius approximate
+            const x = Math.random() * (W - r * 2) + r;
+            const y = Math.random() * (H - r * 2) + r;
+            const color = palette[i % palette.length];
+            balls.push(new Ball(x, y, r, text, color, w, h));
+        }
+        ctx.restore();
+    }
+
+    // resolve collision between two capsule-shaped badges
+    function resolveCollision(a, b) {
+        // compute spine segments for each capsule
+        const ra = a.h / 2;
+        const rb = b.h / 2;
+        const La = Math.max(0, a.w - a.h);
+        const Lb = Math.max(0, b.w - b.h);
+        const ax = Math.cos(a.angle);
+        const ay = Math.sin(a.angle);
+        const bx = Math.cos(b.angle);
+        const by = Math.sin(b.angle);
+
+        const a0 = { x: a.x - ax * (La / 2), y: a.y - ay * (La / 2) };
+        const a1 = { x: a.x + ax * (La / 2), y: a.y + ay * (La / 2) };
+        const b0 = { x: b.x - bx * (Lb / 2), y: b.y - by * (Lb / 2) };
+        const b1 = { x: b.x + bx * (Lb / 2), y: b.y + by * (Lb / 2) };
+
+        const { pa, pb } = closestPointsOnSegments(a0, a1, b0, b1);
+        let dx = pb.x - pa.x;
+        let dy = pb.y - pa.y;
+        let dist = Math.hypot(dx, dy);
+        const rsum = ra + rb;
+        if (dist === 0) {
+            // fallback to center-to-center
+            dx = b.x - a.x;
+            dy = b.y - a.y;
+            dist = Math.hypot(dx, dy) || 0.0001;
+        }
+
+        if (dist < rsum) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const penetration = rsum - dist;
+            const total = a.mass + b.mass;
+            const pushA = penetration * (b.mass / total);
+            const pushB = penetration * (a.mass / total);
+            // positional correction along normal (separate the capsules)
+            a.x -= nx * pushA;
+            a.y -= ny * pushA;
+            b.x += nx * pushB;
+            b.y += ny * pushB;
+
+            // recompute contact points after move for better impulse calc
+            const contact = { x: pa.x + nx * ra, y: pa.y + ny * ra };
+            const raVec = { x: contact.x - a.x, y: contact.y - a.y };
+            const rbVec = { x: contact.x - b.x, y: contact.y - b.y };
+
+            // velocities at contact (include rotational contribution)
+            const velA = {
+                x: a.vx + -a.av * raVec.y,
+                y: a.vy + a.av * raVec.x,
+            };
+            const velB = {
+                x: b.vx + -b.av * rbVec.y,
+                y: b.vy + b.av * rbVec.x,
+            };
+            const relVx = velB.x - velA.x;
+            const relVy = velB.y - velA.y;
+            const velAlongNormal = relVx * nx + relVy * ny;
+
+            const restitution = 0.9;
+            if (velAlongNormal < 0) {
+                // approximate impulse ignoring rotational inertia for stability
+                const j =
+                    (-(1 + restitution) * velAlongNormal) /
+                    (1 / a.mass + 1 / b.mass);
+                const jx = j * nx;
+                const jy = j * ny;
+                a.vx -= jx / a.mass;
+                a.vy -= jy / a.mass;
+                b.vx += jx / b.mass;
+                b.vy += jy / b.mass;
+
+                // apply small angular impulse from tangential relative motion
+                const tx = -ny;
+                const ty = nx;
+                const relTangent = relVx * tx + relVy * ty;
+                const angImpulse = relTangent * 0.002; // tuned factor
+                a.av -= angImpulse * (b.mass / total);
+                b.av += angImpulse * (a.mass / total);
+            }
+        }
+    }
+
+    // helper: closest points on two segments (returns {pa,pb})
+    function closestPointsOnSegments(a0, a1, b0, b1) {
+        const ux = a1.x - a0.x;
+        const uy = a1.y - a0.y;
+        const vx = b1.x - b0.x;
+        const vy = b1.y - b0.y;
+        const wx = a0.x - b0.x;
+        const wy = a0.y - b0.y;
+        const a = ux * ux + uy * uy; // always >= 0
+        const b = ux * vx + uy * vy;
+        const c = vx * vx + vy * vy; // always >= 0
+        const d = ux * wx + uy * wy;
+        const e = vx * wx + vy * wy;
+        const D = a * c - b * b;
+        let sc,
+            sN,
+            sD = D;
+        let tc,
+            tN,
+            tD = D;
+
+        const EPS = 1e-8;
+        if (D < EPS) {
+            // almost parallel
+            sN = 0;
+            sD = 1;
+            tN = e;
+            tD = c;
+        } else {
+            sN = b * e - c * d;
+            tN = a * e - b * d;
+            if (sN < 0) {
+                sN = 0;
+                tN = e;
+                tD = c;
+            } else if (sN > sD) {
+                sN = sD;
+                tN = e + b;
+                tD = c;
+            }
+        }
+
+        if (tN < 0) {
+            tN = 0;
+            if (-d < 0) {
+                sN = 0;
+            } else if (-d > a) {
+                sN = sD;
+            } else {
+                sN = -d;
+                sD = a;
+            }
+        } else if (tN > tD) {
+            tN = tD;
+            if (-d + b < 0) {
+                sN = 0;
+            } else if (-d + b > a) {
+                sN = sD;
+            } else {
+                sN = -d + b;
+                sD = a;
+            }
+        }
+
+        sc = Math.abs(sN) < EPS ? 0 : sN / sD;
+        tc = Math.abs(tN) < EPS ? 0 : tN / tD;
+
+        const pa = { x: a0.x + ux * sc, y: a0.y + uy * sc };
+        const pb = { x: b0.x + vx * tc, y: b0.y + vy * tc };
+        return { pa, pb };
+    }
+
+    let lastTime = performance.now();
+
+    function step(now) {
+        const dt = Math.min(32, now - lastTime) / 16.6667; // approx frames (1 = 60fps)
+        lastTime = now;
+
+        // guard canvas size — if zero, skip this frame and retry shortly
+        if (!canvas.width || !canvas.height) {
+            lastTime = performance.now();
+            requestAnimationFrame(step);
+            return;
+        }
+
+        const W = canvas.width / DPR;
+        const H = canvas.height / DPR;
+
+        // integrate
+        for (const b of balls) {
+            if (!b.isDragged) {
+                b.vy += 0.06 * dt; // light gravity
+                b.vx *= 0.998; // air friction
+                b.vy *= 0.998;
+                b.x += b.vx * dt;
+                b.y += b.vy * dt;
+                // angular integration
+                b.angle += b.av * dt;
+                b.av *= 0.995; // angular damping
+            }
+
+            // walls
+            if (b.x - b.r < 0) {
+                b.x = b.r;
+                if (b.vx < 0) b.vx *= -0.8;
+            }
+            if (b.x + b.r > W) {
+                b.x = W - b.r;
+                if (b.vx > 0) b.vx *= -0.8;
+            }
+            if (b.y - b.r < 0) {
+                b.y = b.r;
+                if (b.vy < 0) b.vy *= -0.8;
+            }
+            if (b.y + b.r > H) {
+                b.y = H - b.r;
+                if (b.vy > 0) b.vy *= -0.8;
+            }
+        }
+
+        // collisions O(n^2) - run multiple relaxation passes to avoid overlap
+        const passes = 3;
+        for (let pass = 0; pass < passes; pass++) {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    resolveCollision(balls[i], balls[j]);
+                }
+            }
+        }
+
+        // draw badges
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(1, 1);
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        for (const b of balls) {
+            // shadow (soft drop)
+            // skip rendering invalid items to avoid canvas API errors
+            if (!canDrawBall(b)) continue;
+
+            try {
+                ctx.beginPath();
+                ctx.fillStyle = "rgba(2,6,23,0.07)";
+                ctx.ellipse(
+                    b.x + 2,
+                    b.y + Math.min(6, b.h / 2) + 3,
+                    Math.max(1, b.w * 0.45),
+                    Math.max(1, b.h * 0.45),
+                    0,
+                    0,
+                    Math.PI * 2,
+                );
+                ctx.fill();
+            } catch (err) {
+                // If drawing the shadow fails, skip this badge
+                continue;
+            }
+
+            // badge (rounded rect) with rotation
+            ctx.save();
+            ctx.translate(b.x, b.y);
+            ctx.rotate(b.angle);
+            const bw = b.w;
+            const bh = b.h;
+            const rx = Math.min(bh / 2, 18);
+
+            // background: gradient for shiny founders, solid for others
+            ctx.beginPath();
+            roundedRectPath(ctx, -bw / 2, -bh / 2, bw, bh, rx);
+            if (Array.isArray(b.color)) {
+                const g = ctx.createLinearGradient(
+                    -bw / 2,
+                    -bh / 2,
+                    bw / 2,
+                    bh / 2,
+                );
+                g.addColorStop(0, b.color[0]);
+                g.addColorStop(1, b.color[1]);
+                ctx.fillStyle = g;
+            } else {
+                ctx.fillStyle = b.color;
+            }
+            ctx.fill();
+
+            // if founder, draw left circular image and name to the right
+            if (b.isFounder && b.img) {
+                const imgRadius = Math.max(bh / 2 - 6, 12);
+                const imgCenterX = -bw / 2 + imgRadius + 8;
+                const imgCenterY = 0;
+                // image circle clip
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(imgCenterX, imgCenterY, imgRadius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                // draw image only when loaded — guard to avoid IndexSizeError
+                if (b.img && b.img.complete && b.img.naturalWidth > 0) {
+                    try {
+                        // Ensure destination sizes are positive
+                        const dw = Math.max(1, imgRadius * 2);
+                        const dh = Math.max(1, imgRadius * 2);
+                        ctx.drawImage(
+                            b.img,
+                            imgCenterX - imgRadius,
+                            imgCenterY - imgRadius,
+                            dw,
+                            dh,
+                        );
+                    } catch (err) {
+                        // ignore drawing errors for individual images
+                    }
+                } else {
+                    // placeholder circle while image loads
+                    ctx.beginPath();
+                    ctx.fillStyle = "rgba(255,255,255,0.12)";
+                    ctx.arc(imgCenterX, imgCenterY, imgRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                // name text centered in remaining rect
+                ctx.fillStyle = "white";
+                ctx.font = `700 ${Math.max(14, Math.min(18, bh * 0.42))}px system-ui`;
+                const textX = -bw / 2 + bh / 2 + (bw - bh) / 2;
+                ctx.fillText(b.text, textX, 0);
+            } else {
+                // normal chip
+                ctx.fillStyle = "white";
+                ctx.font = `600 ${Math.max(11, Math.min(14, bh * 0.5))}px system-ui`;
+                ctx.fillText(b.text, 0, 0);
+            }
+            ctx.restore();
+        }
+
+        ctx.restore();
+        requestAnimationFrame(step);
+    }
+
+    // pointer interactions
+    let dragging = null;
+    let pointerId = null;
+    let lastPointer = { x: 0, y: 0, t: 0 };
+
+    function getPointerPos(evt) {
+        if (evt.touches && evt.touches[0]) {
+            const t = evt.touches[0];
+            return { x: t.clientX, y: t.clientY };
+        }
+        return { x: evt.clientX, y: evt.clientY };
+    }
+
+    function toLocal(pos) {
+        const rect = canvas.getBoundingClientRect();
+        return { x: pos.x - rect.left, y: pos.y - rect.top };
+    }
+
+    function pointerDown(e) {
+        e.preventDefault();
+        const pos = getPointerPos(e);
+        const p = toLocal(pos);
+        // find topmost ball under pointer
+        for (let i = balls.length - 1; i >= 0; i--) {
+            const b = balls[i];
+            const dx = p.x - b.x;
+            const dy = p.y - b.y;
+            if (dx * dx + dy * dy <= b.r * b.r) {
+                dragging = b;
+                b.isDragged = true;
+                // bring to front
+                balls.splice(i, 1);
+                balls.push(b);
+                pointerId =
+                    e.pointerId ||
+                    (e.touches && e.touches[0] && e.touches[0].identifier) ||
+                    null;
+                lastPointer = { x: p.x, y: p.y, t: performance.now() };
+                break;
+            }
+        }
+    }
+
+    function pointerMove(e) {
+        if (!dragging) return;
+        const pos = getPointerPos(e);
+        const p = toLocal(pos);
+        const now = performance.now();
+        const dt = Math.max(1, now - lastPointer.t);
+        // set velocity from pointer movement
+        const vx = (p.x - lastPointer.x) / (dt / 16.6667);
+        const vy = (p.y - lastPointer.y) / (dt / 16.6667);
+        dragging.vx = vx;
+        dragging.vy = vy;
+        // rotation from pointer movement (simulate torque)
+        dragging.av = vx * 0.002 + vy * 0.001;
+        dragging.x = p.x;
+        dragging.y = p.y;
+        lastPointer = { x: p.x, y: p.y, t: now };
+    }
+
+    function pointerUp(e) {
+        if (!dragging) return;
+        // apply the last captured velocity (already set during move)
+        dragging.isDragged = false;
+        // small angular carry on release
+        dragging.av += dragging.vx * 0.002;
+        dragging = null;
+        pointerId = null;
+    }
+
+    // attach pointer/touch events
+    function attach() {
+        // pointer events
+        canvas.addEventListener("pointerdown", pointerDown, { passive: false });
+        window.addEventListener("pointermove", pointerMove, { passive: false });
+        window.addEventListener("pointerup", pointerUp, { passive: false });
+
+        // fallback for touch-only
+        canvas.addEventListener("touchstart", pointerDown, { passive: false });
+        window.addEventListener("touchmove", pointerMove, { passive: false });
+        window.addEventListener("touchend", pointerUp, { passive: false });
+    }
+
+    // initialize
+    resize();
+    initBalls();
+    attach();
+    requestAnimationFrame(step);
+
+    // Resize observer
+    const ro = new ResizeObserver(() => {
+        resize();
+        initBalls();
+    });
+    ro.observe(canvas);
+
+    // If the canvas was hidden at load time (Easter-egg hidden), reinitialize when it's revealed
+    window.addEventListener("pool:revealed", () => {
+        // small timeout to allow layout to update
+        setTimeout(() => {
+            try {
+                resize();
+                initBalls();
+            } catch (err) {
+                // ignore
+            }
+        }, 40);
+    });
+
+    // helper: rounded rect path
+    function roundedRectPath(ctx, x, y, w, h, r) {
+        const radius = Math.min(r, h / 2, w / 2);
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+    }
+</script>

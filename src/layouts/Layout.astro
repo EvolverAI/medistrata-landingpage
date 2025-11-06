@@ -297,4 +297,76 @@ const {
 		color: var(--muted-2);
 		font-weight: 700;
 	}
+
+	/* Easter egg: hide the word-pool section by default; revealed when unlocked */
+	.section#word-pool {
+		display: none !important;
+	}
+
+	.section#word-pool.revealed {
+		display: block !important;
+	}
 </style>
+
+<script>
+	(function () {
+		// Reveal the #word-pool when the logo is clicked 5 times quickly.
+		const CLICK_COUNT = 5;
+		const CLICK_TIMEOUT = 800; // ms to reset count
+		let clicks = 0;
+		/** @type {number | null} */
+		let clickTimer = null;
+
+		function revealPool() {
+			const el = document.getElementById("word-pool");
+			if (!el) return;
+			el.classList.add("revealed");
+			// transient reveal only — do NOT persist to localStorage so refresh hides it again
+			// small toast
+			const flash = document.createElement("div");
+			flash.textContent = "Pool unlocked!";
+			Object.assign(flash.style, {
+				position: "fixed",
+				left: "50%",
+				top: "12%",
+				transform: "translateX(-50%)",
+				background: "rgba(0,0,0,0.8)",
+				color: "#fff",
+				padding: "8px 12px",
+				borderRadius: "6px",
+				zIndex: 9999,
+			});
+			document.body.appendChild(flash);
+			setTimeout(() => flash.remove(), 1200);
+		}
+
+		// attach to logo
+		window.addEventListener("DOMContentLoaded", () => {
+			const logo = document.querySelector(".logo");
+			if (logo) {
+				logo.addEventListener("click", (e) => {
+					clicks++;
+					if (clickTimer) clearTimeout(clickTimer);
+					clickTimer = window.setTimeout(() => {
+						clicks = 0;
+						clickTimer = null;
+					}, CLICK_TIMEOUT);
+					if (clicks >= CLICK_COUNT) {
+						revealPool();
+						// notify any listeners (e.g., canvas) that the pool was revealed so they can reinitialize sizing
+						try {
+							window.dispatchEvent(
+								new CustomEvent("pool:revealed"),
+							);
+						} catch (e) {
+							// ignore
+						}
+						clicks = 0;
+					}
+				});
+			}
+
+			// Do not auto-reveal on load; pool remains hidden until the user triggers it.
+		});
+	})();
+</script>

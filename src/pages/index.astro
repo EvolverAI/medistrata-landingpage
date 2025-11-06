@@ -6,11 +6,22 @@ import Section from "../components/Section.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import Contact from "../components/Contact.astro";
 import medistrataIntro from "../assets/medistrata-intro.png";
+import BallPool from "../components/BallPool.astro";
 ---
 
 <Layout>
 	<Navigation />
 	<Hero />
+
+	<!-- Interactive Ball Pool Section -->
+	<Section
+		id="word-pool"
+		title="MediStrata+ Pool"
+		subtitle="Drag and toss the chips"
+		centered={true}
+	>
+		<BallPool />
+	</Section>
 
 	<!-- Introduction Section -->
 	<Section
