@@ -13,10 +13,17 @@ const { tabs } = Astro.props;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const containers = document.querySelectorAll(".sticky-tabs");
+        const containers = document.querySelectorAll(
+            ".sticky-tabs",
+        ) as NodeListOf<HTMLDivElement>;
         containers.forEach((container) => {
-            const tabButtons = container.querySelector(".tab-buttons");
-            const sectionsContainer = container.querySelector(".sections");
+            const tabButtons = container.querySelector(
+                ".tab-buttons",
+            ) as HTMLDivElement;
+            const sectionsContainer = container.querySelector(
+                ".sections",
+            ) as HTMLDivElement;
+            if (!tabButtons || !sectionsContainer) return; // ✅ Prevents lint warning
             const sections = Array.from(sectionsContainer.children);
             const tabs = container.dataset.tabs
                 ? JSON.parse(container.dataset.tabs)
@@ -28,7 +35,7 @@ const { tabs } = Astro.props;
             });
 
             // Create tab buttons
-            tabs.forEach((tabName, index) => {
+            tabs.forEach((tabName: string, index: number) => {
                 const button = document.createElement("button");
                 button.textContent = tabName;
                 button.classList.add("tab-button");

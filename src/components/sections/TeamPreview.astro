@@ -1,9 +1,14 @@
 ---
-import Section from "../Section.astro";
+import Section from "@/components/Section.astro";
+import PeopleGrid from "@/components/PeopleGrid.astro";
+import people from "@/data/people.json";
 ---
 
 <Section id="our-team" title="Meet Our Team" centered={true}>
-    <div class="team-preview-grid">
-        <slot />
-    </div>
+    <p class="lead-text">
+        MediStrata was founded by a team of technology and operations leaders
+        with a long track record in data management, automation, and process
+        efficiency across complex global environments.
+    </p>
+    <PeopleGrid persons={people} />
 </Section>

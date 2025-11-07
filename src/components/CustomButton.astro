@@ -27,7 +27,7 @@ const {
         // Magnetic effect with cursor tracking
         const magneticButtons = document.querySelectorAll(
             ".magnetic, .magnetic-text-flip",
-        );
+        ) as NodeListOf<HTMLAnchorElement>;
         magneticButtons.forEach((button) => {
             button.addEventListener("mousemove", (e) => {
                 const rect = button.getBoundingClientRect();

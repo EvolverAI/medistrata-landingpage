@@ -10,7 +10,7 @@ const {
     buttonUrl,
 } = Astro.props;
 
-const getIcon = (iconName) => {
+const getIcon = (iconName: string) => {
     switch (iconName) {
         case "Plus":
             return "+";
@@ -34,5 +34,11 @@ const getIcon = (iconName) => {
     <div class="card-icon">{getIcon(icon)}</div>
     <h3 class="card-title">{title}</h3>
     <p class="card-description">{description}</p>
-    <a href={buttonUrl} class="card-button">{buttonLabel}</a>
+    {
+        buttonLabel && buttonUrl && (
+            <a href={buttonUrl} class="card-button">
+                {buttonLabel}
+            </a>
+        )
+    }
 </div>

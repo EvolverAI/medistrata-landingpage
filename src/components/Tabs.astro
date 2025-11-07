@@ -11,13 +11,21 @@ import "@/styles/components/tabs.css";
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const tabsContainers = document.querySelectorAll(".tabs");
+        const tabsContainers = document.querySelectorAll(
+            ".tabs",
+        ) as NodeListOf<HTMLDivElement>;
         tabsContainers.forEach((tabsContainer) => {
-            const tabButtons = tabsContainer.querySelector(".tab-buttons");
-            const tabContent = tabsContainer.querySelector(".tab-content");
+            const tabButtons = tabsContainer.querySelector(
+                ".tab-buttons",
+            ) as HTMLDivElement;
+            const tabContent = tabsContainer.querySelector(
+                ".tab-content",
+            ) as HTMLDivElement;
+            if (!tabButtons || !tabContent) return; // ✅ Prevents lint warning
+
             const tabs = tabContent.querySelectorAll("tab-component");
 
-            tabs.forEach((tab, index) => {
+            tabs.forEach((tab, index: number) => {
                 const name = tab.getAttribute("name");
                 const button = document.createElement("button");
                 button.textContent = name;

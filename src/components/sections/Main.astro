@@ -1,21 +1,152 @@
 ---
+import Section from "@/components/Section.astro";
+import FeatureCard from "@/components/FeatureCard.astro";
 import StickyTabs from "@/components/StickyTabs.astro";
+import Accordion from "@/components/Accordion.astro";
+import Notice from "@/components/Notice.astro";
+import CardGrid from "@/components/CardGrid.astro";
+import Card from "@/components/Card.astro";
+import "@/styles/features.css";
 ---
 
-<StickyTabs
-    tabs={["Overview", "Why MediStrata", "Our Vision"]}
-    activeTab="Overview"
->
-    <div>
-        <h2>Overview</h2>
-        <p>This is the overview content.</p>
-    </div>
-    <div>
-        <h2>Why MediStrata</h2>
-        <p>This is the Why MediStrata content.</p>
-    </div>
-    <div>
-        <h2>Our Vision</h2>
-        <p>This is the Our Vision content.</p>
-    </div>
-</StickyTabs>
+<Section id="main" centered={true}>
+    <StickyTabs
+        tabs={["Overview", "Why MediStrata", "Our Vision"]}
+        activeTab="Overview"
+    >
+        <div>
+            <h2>Overview</h2>
+            <div class="features-grid">
+                <FeatureCard
+                    icon="🔒"
+                    title="Unified Patient View"
+                    description="HIPAA-compliant infrastructure with end-to-end encryption, role-based access control, and comprehensive audit trails to ensure your data remains secure and compliant."
+                />
+                <FeatureCard
+                    icon="🔄"
+                    title="Intelligent Automation"
+                    description="Connect with existing EHR systems, laboratory information systems, and third-party applications through our robust API ecosystem and standardized protocols."
+                />
+                <FeatureCard
+                    icon="📊"
+                    title="Insight on Demand"
+                    description="Transform raw data into actionable insights with our AI-powered analytics engine, real-time dashboards, and customizable reporting tools."
+                />
+            </div>
+        </div>
+        <div>
+            <h2>Why MediStrata</h2>
+            <Accordion
+                label="Problem → Solution"
+                group="medistrata-why"
+                expanded={true}
+            >
+                <h2>Problems</h2>
+                <CardGrid>
+                    <Card
+                        title="Problem 1"
+                        icon="Plus"
+                        description="Patient information is scattered across disconnected systems and formats. Clinicians waste time searching, cross-checking, and re-entering data instead of focusing on care. Critical details are easily missed, leading to inefficiency and risk."
+                        alignment="left"
+                    />
+                    <Card
+                        title="Problem 2"
+                        icon="Plus"
+                        description="Clinicians and staff spend hours on repetitive paperwork and digital forms that don’t connect. Each system requires separate entries and approvals, creating redundant work, wasted time, and frustration that takes focus away from patient care."
+                        alignment="left"
+                    />
+                    <Card
+                        title="Problem 3"
+                        icon="Plus"
+                        description="Valuable consultation time is lost searching for information, reviewing notes, and updating records. Disorganized data and rigid software force clinicians to multitask between systems instead of engaging fully with the patient."
+                        alignment="left"
+                    />
+                </CardGrid>
+                <h2>Solutions</h2>
+                <CardGrid>
+                    <Card
+                        title="Unified Patient View"
+                        icon="Check"
+                        description="MediStrata consolidates all clinical and administrative information into a single, adaptive dashboard — eliminating the need to search across systems and giving every user an organized, complete picture at a glance."
+                        alignment="left"
+                    />
+                    <Card
+                        title="Intelligent Automation"
+                        icon="Check"
+                        description="Repetitive administrative tasks such as form-filling, summaries, and insurance documentation are handled by AI — reducing manual effort, improving accuracy, and giving clinicians more time for patients."
+                        alignment="left"
+                    />
+                    <Card
+                        title="Insight on Demand"
+                        icon="Check"
+                        description="MediStrata surfaces the most relevant information automatically and allows users to query their entire database in natural language — turning complexity into instant, actionable clarity during every patient interaction."
+                        alignment="left"
+                    />
+                </CardGrid>
+                <Notice type="success">
+                    Together, these capabilities make data effortless to access,
+                    documentation faster, and care more precise.
+                </Notice>
+            </Accordion>
+            <Accordion label="Time Savings Impact" group="medistrata-why"
+                >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                sit amet justo vitae nunc egestas viverra eu in elit. Donec
+                maximus, nulla ut viverra dapibus, libero magna luctus sem,
+                vitae pulvinar sapien mauris at justo. Cras finibus pharetra
+                commodo. Praesent non mattis augue, eget semper dui. Donec
+                tincidunt faucibus purus id malesuada. Nullam feugiat aliquam
+                magna, ut laoreet justo mattis sit amet. Nunc nec lorem quam.
+                Fusce tristique magna at dolor pharetra, sit amet sodales velit
+                vestibulum. Donec egestas, massa id lacinia ultrices, tortor
+                dolor condimentum urna, vel tincidunt enim ligula eu turpis.
+                Quisque vel ligula turpis. Duis eros nisl, ultrices quis mi eu,
+                dapibus dignissim velit. Nulla ipsum libero, hendrerit eget
+                viverra vitae, bibendum sed odio. In mauris velit, pulvinar ut
+                dolor et, tincidunt pretium enim. Maecenas et ipsum ac odio
+                tempor posuere. Aliquam ullamcorper enim quis est tempus, vel
+                luctus diam gravida.</Accordion
+            >
+            <Accordion label="Clinical Accuracy" group="medistrata-why"
+                >Quisque aliquam, ligula vel scelerisque condimentum, metus
+                neque congue risus, quis porttitor eros lorem vel turpis.
+                Praesent pellentesque, nunc eget consequat venenatis, tortor
+                erat suscipit purus, eu convallis urna lacus sit amet nisl.
+                Etiam quis ex vel nisl pharetra faucibus. Suspendisse maximus
+                libero turpis, quis imperdiet mauris auctor sit amet. Vestibulum
+                vulputate odio in finibus hendrerit. Proin convallis tellus id
+                suscipit venenatis. In fermentum odio leo, cursus gravida diam
+                aliquam vitae. Cras vel tempus nisl. Pellentesque porttitor est
+                nec massa varius, at vehicula urna molestie. Proin semper varius
+                turpis. Aliquam euismod at dui id vestibulum. Phasellus
+                efficitur ex sit amet ipsum luctus, ut commodo dui egestas.
+                Donec auctor, ante tempus facilisis accumsan, odio nibh congue
+                quam, non cursus ante ipsum eget nisl. Curabitur laoreet ipsum a
+                mauris blandit, vel pellentesque quam ullamcorper. Maecenas
+                ultricies, justo nec venenatis posuere, elit ligula condimentum
+                odio, in vestibulum est sapien eget massa. Suspendisse in odio
+                lacinia, lacinia enim consequat, scelerisque velit.
+            </Accordion>
+            <Notice type="info">
+                By automating data integration and standardization, MediStrata
+                reduces manual data handling by up to 80%, allowing healthcare
+                professionals to focus more on patient care and less on
+                administrative tasks.
+            </Notice>
+        </div>
+        <div>
+            <h2>Our Vision</h2>
+            <CardGrid>
+                <Card
+                    icon="Rocket"
+                    description="We envision a healthcare world where data works seamlessly for people — not the other way around. A world where every clinician, nurse, and administrator can instantly access the information they need, in context, with clarity."
+                    alignment="center"
+                />
+                <Card
+                    icon="Chart"
+                    description="At MediStrata, we believe that by transforming how medical data is organized, understood, and used, we can make care faster, more accurate, and profoundly more human."
+                    alignment="center"
+                />
+            </CardGrid>
+        </div>
+    </StickyTabs>
+</Section>

@@ -14,7 +14,9 @@ const isExpanded = expanded === "true" || expanded === true;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const details = document.querySelectorAll("details[data-group]");
+        const details = document.querySelectorAll(
+            "details[data-group]",
+        ) as NodeListOf<HTMLDetailsElement>;
         details.forEach((detail) => {
             detail.addEventListener("toggle", () => {
                 if (detail.open) {

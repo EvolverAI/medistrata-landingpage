@@ -1,17 +1,20 @@
 [
 	{
+		"image": "/founders/Gabriele-Square-640.png",
+		"name": "Gabriele De Benedittis",
+		"title": "Operations & Strategy",
+		"text": "Technology and operations executive with 15+ years leading global transformation and efficiency programs. Expert in data systems, automation, and organizational design."
+	},
+	{
 		"image": "/founders/Franc-Square-640.png",
 		"name": "Francesco Rossi",
-		"title": "Co-founder"
+		"title": "AI & Software Engineering",
+		"text": "A visionary technologist and full-stack engineer with deep expertise in AI and automation. Francesco transforms complex data challenges into elegant, intelligent solutions — the technical backbone of MediStrata’s platform."
 	},
 	{
 		"image": "/founders/Nicola-Square-640.png",
 		"name": "Nicola Bianchi",
-		"title": "Co-founder"
-	},
-	{
-		"image": "/founders/Gabriele-Square-640.png",
-		"name": "Gabriele De Benedittis",
-		"title": "Co-founder"
-	}
+		"title": "Product & Integrations",
+		"text": "Product and technology leader with deep expertise in workflow automation and data integration. Skilled in translating complex business needs into scalable digital solutions."
+	}	
 ]
