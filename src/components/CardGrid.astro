@@ -1,16 +1,7 @@
 ---
-
+import "../styles/components/card-grid.css";
 ---
 
 <div class="card-grid">
     <slot />
 </div>
-
-<style>
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
-        margin: 2rem 0;
-    }
-</style>

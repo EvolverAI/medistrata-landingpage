@@ -1,0 +1,67 @@
+/* Styles for the Feature Card component */
+
+.feature-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    background: #ffffff;
+    background-image: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.96));
+    border: 1px solid var(--line);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+}
+
+.feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--accent-ink);
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+.feature-description {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .feature-title {
+        font-size: 1.125rem;
+    }
+
+    .feature-description {
+        font-size: 0.95rem;
+    }
+}

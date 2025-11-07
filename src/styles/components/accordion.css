@@ -1,0 +1,42 @@
+/* Accordion Component Styles */
+
+.accordion {
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.accordion-summary {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+    position: relative;
+}
+
+.accordion-summary::-webkit-details-marker {
+    display: none;
+}
+
+.accordion-summary::after {
+    content: "+";
+    position: absolute;
+    right: 1rem;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.accordion[open] .accordion-summary::after {
+    content: "-";
+}
+
+.accordion-content {
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.accordion[open] .accordion-content {
+    border-top: 1px solid #ddd;
+}

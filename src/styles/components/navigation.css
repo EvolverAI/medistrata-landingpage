@@ -1,0 +1,156 @@
+/* Styles for the Navigation component */
+
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: color-mix(in srgb, white 92%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2rem;
+}
+
+.logo-text {
+    font-weight: 600;
+}
+
+.logo-plus {
+    font-weight: 700;
+    color: var(--accent);
+    margin-left: 0.1em;
+}
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.burger-menu span {
+    width: 25px;
+    height: 2px;
+    background: #000;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.burger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    color: color-mix(in srgb, var(--text) 92%, #4a4a4a);
+    font-weight: 600;
+    font-size: 0.975rem;
+    letter-spacing: 0.01em;
+    position: relative;
+    display: inline-block;
+    padding: 0.25rem 0;
+}
+
+.nav-links a:hover {
+    color: var(--accent-ink);
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            var(--accent) 35%,
+            var(--accent-2) 70%,
+            transparent);
+    transform: scaleX(0.2);
+    transform-origin: center;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease,
+        transform 0.25s ease;
+}
+
+.nav-links a:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 74%;
+        max-width: 320px;
+        flex-direction: column;
+        background: #fff;
+        padding: 5rem 2rem 2rem;
+        box-shadow: -5px 0 28px rgba(0, 0, 0, 0.12);
+        transition: right 0.3s ease;
+        gap: 1.25rem;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.125rem;
+    }
+}

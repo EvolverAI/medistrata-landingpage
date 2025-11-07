@@ -1,5 +1,6 @@
 ---
 import PersonCard from "./PersonCard.astro";
+import "../styles/components/people-grid.css";
 
 export interface Props {
     persons: {
@@ -31,79 +32,6 @@ const { persons, gap = "1rem" } = Astro.props;
         ))
     }
 </section>
-
-<style>
-    .people-grid {
-        --gap: var(--people-grid-gap, 1rem);
-        display: flex;
-        gap: var(--gap);
-        justify-content: center;
-        align-items: flex-start;
-        margin: 0;
-    }
-
-    .person-wrapper {
-        padding: 6px;
-        box-sizing: border-box;
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-            opacity 0.6s ease,
-            transform 0.6s ease;
-    }
-
-    .person-wrapper.animate {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .person-wrapper.animate:nth-child(1) {
-        transition-delay: 0s;
-    }
-    .person-wrapper.animate:nth-child(2) {
-        transition-delay: 0.2s;
-    }
-    .person-wrapper.animate:nth-child(3) {
-        transition-delay: 0.4s;
-    }
-    .person-wrapper.animate:nth-child(4) {
-        transition-delay: 0.6s;
-    }
-
-    /* Four per row on wide screens */
-    .people-grid > * {
-        flex: 0 0 274px;
-        width: 274px;
-        margin: 0;
-    }
-
-    /* Three per row */
-    @media (max-width: 1000px) {
-        .people-grid > * {
-            flex: 0 0 214px;
-            width: 214px;
-            margin: 0;
-        }
-    }
-
-    /* Two per row */
-    @media (max-width: 640px) {
-        .people-grid > * {
-            flex: 0 0 174px;
-            width: 174px;
-            margin: 0;
-        }
-    }
-
-    /* Single column */
-    @media (max-width: 420px) {
-        .people-grid > * {
-            flex: 0 0 174px;
-            width: 174px;
-            margin: 0;
-        }
-    }
-</style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
