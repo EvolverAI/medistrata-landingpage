@@ -1,0 +1,47 @@
+---
+import Section from "../Section.astro";
+import FeatureCard from "../FeatureCard.astro";
+import "../../styles/features.css";
+---
+
+<!-- Features Section -->
+<Section
+    id="features"
+    title="Key Features"
+    subtitle="Powerful capabilities designed for modern healthcare"
+    background="light"
+    centered={true}
+>
+    <div class="features-grid">
+        <FeatureCard
+            icon="🔒"
+            title="Enterprise Security"
+            description="HIPAA-compliant infrastructure with end-to-end encryption, role-based access control, and comprehensive audit trails to ensure your data remains secure and compliant."
+        />
+        <FeatureCard
+            icon="🔄"
+            title="Seamless Integration"
+            description="Connect with existing EHR systems, laboratory information systems, and third-party applications through our robust API ecosystem and standardized protocols."
+        />
+        <FeatureCard
+            icon="📊"
+            title="Advanced Analytics"
+            description="Transform raw data into actionable insights with our AI-powered analytics engine, real-time dashboards, and customizable reporting tools."
+        />
+        <FeatureCard
+            icon="☁️"
+            title="Cloud-Native Architecture"
+            description="Scalable, reliable, and available anywhere with our modern cloud infrastructure designed to grow with your organization's needs."
+        />
+        <FeatureCard
+            icon="🤖"
+            title="AI-Powered Insights"
+            description="Leverage machine learning algorithms for predictive analytics, pattern recognition, and automated decision support to enhance clinical workflows."
+        />
+        <FeatureCard
+            icon="⚡"
+            title="Real-Time Performance"
+            description="Process and analyze data in real-time with our high-performance architecture, ensuring immediate access to critical information when you need it."
+        />
+    </div>
+</Section>

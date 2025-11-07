@@ -21,7 +21,9 @@ const shinyPalettes = [
         <div class="stat">
             <div class="stat-label">Energy</div>
             <div class="stat-value" id="stat-energy">0</div>
-            <div class="stat-bar"><div class="stat-bar-fill" id="bar-energy"></div></div>
+            <div class="stat-bar">
+                <div class="stat-bar-fill" id="bar-energy"></div>
+            </div>
         </div>
         <div class="stat">
             <div class="stat-label">Avg speed</div>
@@ -53,12 +55,26 @@ const shinyPalettes = [
             </label>
             <label class="control-row">
                 <span class="control-label">Restitution</span>
-                <input id="restitution-slider" type="range" min="0" max="1" step="0.01" value="0.9">
+                <input
+                    id="restitution-slider"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="0.9"
+                />
                 <span id="restitution-value" class="control-num">0.90</span>
             </label>
             <label class="control-row">
                 <span class="control-label">Damping</span>
-                <input id="damping-slider" type="range" min="0.95" max="1" step="0.001" value="0.998">
+                <input
+                    id="damping-slider"
+                    type="range"
+                    min="0.95"
+                    max="1"
+                    step="0.001"
+                    value="0.998"
+                />
                 <span id="damping-value" class="control-num">0.998</span>
             </label>
             <div style="display:flex;gap:8px;margin-top:6px;">
@@ -106,27 +122,87 @@ const shinyPalettes = [
         top: 12px;
         left: 12px;
         z-index: 10;
-        color: rgba(255,255,255,0.95);
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        color: rgba(255, 255, 255, 0.95);
+        font-family:
+            system-ui,
+            -apple-system,
+            "Segoe UI",
+            Roboto,
+            "Helvetica Neue",
+            Arial;
         pointer-events: auto;
-        background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.18));
+        background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.28),
+            rgba(0, 0, 0, 0.18)
+        );
         padding: 10px;
         border-radius: 10px;
         backdrop-filter: blur(6px) saturate(120%);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
         width: 200px;
     }
-    .ballpool-stats .stat { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
-    .ballpool-stats .stat-label { font-size: 11px; opacity: 0.8; }
-    .ballpool-stats .stat-value { font-weight: 700; font-size: 13px; }
-    .ballpool-stats .stat-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; }
-    .ballpool-stats .stat-bar-fill { height: 100%; background: linear-gradient(90deg,#06b6d4,#3b82f6); transform-origin: left center; transform: scaleX(0); transition: transform 120ms linear; }
-    .ballpool-stats .controls { margin-top: 4px; display:flex; flex-direction:column; gap:6px; }
-    .ballpool-stats .control-row { display:flex; align-items:center; gap:8px; font-size:12px; }
-    .ballpool-stats .control-label { width: 72px; opacity:0.85; }
-    .ballpool-stats select, .ballpool-stats input[type="range"] { width: 100%; }
-    .ballpool-stats .control-num { min-width:40px; text-align:right; font-weight:700; }
-    .ballpool-stats button { background: rgba(255,255,255,0.06); color: white; border: none; padding:6px 8px; border-radius:6px; cursor:pointer; }
+    .ballpool-stats .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .ballpool-stats .stat-label {
+        font-size: 11px;
+        opacity: 0.8;
+    }
+    .ballpool-stats .stat-value {
+        font-weight: 700;
+        font-size: 13px;
+    }
+    .ballpool-stats .stat-bar {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .ballpool-stats .stat-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #06b6d4, #3b82f6);
+        transform-origin: left center;
+        transform: scaleX(0);
+        transition: transform 120ms linear;
+    }
+    .ballpool-stats .controls {
+        margin-top: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .ballpool-stats .control-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+    }
+    .ballpool-stats .control-label {
+        width: 72px;
+        opacity: 0.85;
+    }
+    .ballpool-stats select,
+    .ballpool-stats input[type="range"] {
+        width: 100%;
+    }
+    .ballpool-stats .control-num {
+        min-width: 40px;
+        text-align: right;
+        font-weight: 700;
+    }
+    .ballpool-stats button {
+        background: rgba(255, 255, 255, 0.06);
+        color: white;
+        border: none;
+        padding: 6px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 </style>
 
 <script type="module">
@@ -777,12 +853,12 @@ const shinyPalettes = [
         // lazily cache DOM nodes to avoid repeated lookups
         if (!window.__ballpoolStatsEls) {
             window.__ballpoolStatsEls = {
-                energy: document.getElementById('stat-energy'),
-                energyBar: document.getElementById('bar-energy'),
-                avgSpeed: document.getElementById('stat-avg-speed'),
-                collisions: document.getElementById('stat-collisions'),
-                moving: document.getElementById('stat-moving'),
-                maxSpeed: document.getElementById('stat-max-speed'),
+                energy: document.getElementById("stat-energy"),
+                energyBar: document.getElementById("bar-energy"),
+                avgSpeed: document.getElementById("stat-avg-speed"),
+                collisions: document.getElementById("stat-collisions"),
+                moving: document.getElementById("stat-moving"),
+                maxSpeed: document.getElementById("stat-max-speed"),
             };
         }
         const els = window.__ballpoolStatsEls;
@@ -805,8 +881,10 @@ const shinyPalettes = [
         energyPeak = Math.max(energyPeak * 0.98, totalKE, 1e-6);
         const energyRatio = Math.min(1, totalKE / energyPeak);
 
-        els.energy.textContent = totalKE < 1000 ? totalKE.toFixed(1) : Math.round(totalKE);
-        if (els.energyBar) els.energyBar.style.transform = `scaleX(${energyRatio})`;
+        els.energy.textContent =
+            totalKE < 1000 ? totalKE.toFixed(1) : Math.round(totalKE);
+        if (els.energyBar)
+            els.energyBar.style.transform = `scaleX(${energyRatio})`;
         els.avgSpeed.textContent = avgSpeed.toFixed(2);
         els.collisions.textContent = collisionsThisFrame;
         els.moving.textContent = movingCount;
@@ -816,59 +894,64 @@ const shinyPalettes = [
         collisionsThisFrame = 0;
     }
 
-        // Controls wiring: connect HUD controls to the SIM object
-        (function wireControls() {
-            const presetEl = document.getElementById('gravity-preset');
-            const restSlider = document.getElementById('restitution-slider');
-            const restVal = document.getElementById('restitution-value');
-            const dampSlider = document.getElementById('damping-slider');
-            const dampVal = document.getElementById('damping-value');
-            const resetBtn = document.getElementById('reset-btn');
+    // Controls wiring: connect HUD controls to the SIM object
+    (function wireControls() {
+        const presetEl = document.getElementById("gravity-preset");
+        const restSlider = document.getElementById("restitution-slider");
+        const restVal = document.getElementById("restitution-value");
+        const dampSlider = document.getElementById("damping-slider");
+        const dampVal = document.getElementById("damping-value");
+        const resetBtn = document.getElementById("reset-btn");
 
-            const PRESETS = {
-                deep: 0.0,
-                moon: 0.01,
-                mars: 0.022,
-                earth: 0.06,
-                jupiter: 0.12,
-                sun: 0.4,
-            };
+        const PRESETS = {
+            deep: 0.0,
+            moon: 0.01,
+            mars: 0.022,
+            earth: 0.06,
+            jupiter: 0.12,
+            sun: 0.4,
+        };
 
-            function applyPreset(key) {
-                const v = PRESETS[key] ?? PRESETS.earth;
-                SIM.gravity = v;
-            }
+        function applyPreset(key) {
+            const v = PRESETS[key] ?? PRESETS.earth;
+            SIM.gravity = v;
+        }
 
-            if (presetEl) {
-                presetEl.addEventListener('change', (e) => applyPreset(e.target.value));
-                // initialize from current selection
-                applyPreset(presetEl.value || 'earth');
-            }
+        if (presetEl) {
+            presetEl.addEventListener("change", (e) =>
+                applyPreset(e.target.value),
+            );
+            // initialize from current selection
+            applyPreset(presetEl.value || "earth");
+        }
 
-            if (restSlider && restVal) {
-                restVal.textContent = Number(restSlider.value).toFixed(2);
-                SIM.restitution = parseFloat(restSlider.value);
-                restSlider.addEventListener('input', (e) => {
-                    SIM.restitution = parseFloat(e.target.value);
-                    restVal.textContent = Number(SIM.restitution).toFixed(2);
-                });
-            }
+        if (restSlider && restVal) {
+            restVal.textContent = Number(restSlider.value).toFixed(2);
+            SIM.restitution = parseFloat(restSlider.value);
+            restSlider.addEventListener("input", (e) => {
+                SIM.restitution = parseFloat(e.target.value);
+                restVal.textContent = Number(SIM.restitution).toFixed(2);
+            });
+        }
 
-            if (dampSlider && dampVal) {
-                dampVal.textContent = Number(dampSlider.value).toFixed(3);
-                SIM.linearDamping = parseFloat(dampSlider.value);
-                dampSlider.addEventListener('input', (e) => {
-                    SIM.linearDamping = parseFloat(e.target.value);
-                    // keep angular damping slightly stronger to avoid jitter
-                    SIM.angularDamping = Math.max(0.9, 1 - (1 - SIM.linearDamping) * 0.6);
-                    dampVal.textContent = Number(SIM.linearDamping).toFixed(3);
-                });
-            }
+        if (dampSlider && dampVal) {
+            dampVal.textContent = Number(dampSlider.value).toFixed(3);
+            SIM.linearDamping = parseFloat(dampSlider.value);
+            dampSlider.addEventListener("input", (e) => {
+                SIM.linearDamping = parseFloat(e.target.value);
+                // keep angular damping slightly stronger to avoid jitter
+                SIM.angularDamping = Math.max(
+                    0.9,
+                    1 - (1 - SIM.linearDamping) * 0.6,
+                );
+                dampVal.textContent = Number(SIM.linearDamping).toFixed(3);
+            });
+        }
 
-            if (resetBtn) {
-                resetBtn.addEventListener('click', () => {
-                    initBalls();
-                });
-            }
-        })();
+        if (resetBtn) {
+            resetBtn.addEventListener("click", () => {
+                initBalls();
+            });
+        }
+    })();
 </script>

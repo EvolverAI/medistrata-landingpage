@@ -1,0 +1,34 @@
+---
+import Section from "../Section.astro";
+import medistrataIntro from "../../assets/medistrata-intro.png";
+import PeopleGrid from "../PeopleGrid.astro";
+import people from "../../data/people.json";
+import "../../styles/general.css";
+---
+
+<!-- AboutUs Section -->
+<Section
+    id="about-us"
+    title="About Us"
+    titleAlignment="right"
+    centered={true}
+    image={medistrataIntro.src}
+    imagePosition="right"
+    imageSize="256px"
+>
+    <div class="introduction-content">
+        <p class="lead-text">
+            MediStrata was founded by a team of technology and operations
+            leaders with a long track record in data management, automation, and
+            process efficiency across complex global environments.
+        </p>
+        <p class="lead-text">
+            We bring this experience to healthcare — transforming fragmented
+            patient information into clear, actionable intelligence that
+            supports faster, more accurate clinical and administrative work.
+        </p>
+    </div>
+    <div class="people-content">
+        <PeopleGrid persons={people} />
+    </div>
+</Section>

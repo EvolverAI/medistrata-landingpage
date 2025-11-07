@@ -1,0 +1,409 @@
+---
+import Section from "../Section.astro";
+import PeopleGrid from "../PeopleGrid.astro";
+import CardGrid from "../CardGrid.astro";
+import Card from "../Card.astro";
+import Testimonial from "../Testimonial.astro";
+import StickyTabs from "../StickyTabs.astro";
+import Tabs from "../Tabs.astro";
+import Tab from "../Tab.astro";
+import Accordion from "../Accordion.astro";
+import Notice from "../Notice.astro";
+
+import people from "../../data/people.json";
+---
+
+<!-- Team / Founders Section -->
+<Section id="team" title="Team" subtitle="Founders" centered={true}>
+    <PeopleGrid persons={people} />
+    <Notice type="info" title="Information"
+        >This is a demo site. The team members shown are fictional.</Notice
+    >
+    <Notice type="warning" title="Warning"
+        >This is a demo site. The team members shown are fictional.</Notice
+    >
+    <Notice type="success" title="Success"
+        >This is a demo site. The team members shown are fictional.</Notice
+    >
+    <Notice type="error" title="Error"
+        >This is a demo site. The team members shown are fictional.</Notice
+    >
+    <CardGrid>
+        <Card
+            title="Card 1"
+            description="Tailored strategies"
+            icon="Plus"
+            buttonLabel="Contact Us"
+            buttonUrl="/contact"
+            alignment="left"
+        />
+        <Card
+            title="Card 2"
+            description="Optimized workflows"
+            icon="Check"
+            buttonLabel="Learn More"
+            buttonUrl="/learn-more"
+            alignment="right"
+        />
+        <Card
+            title="Card 3"
+            description="Data-driven insights"
+            icon="Chart"
+            buttonLabel="Get Started"
+            buttonUrl="/get-started"
+            alignment="center"
+        />
+    </CardGrid>
+    <Testimonial
+        customerName="Dr. Alice Johnson"
+        customerTitle="Chief Medical Officer, HealthFirst Clinic"
+        customerImage="/testimonials/alice-johnson.png"
+    >
+        MediStrata has revolutionized how we manage patient data. The intuitive
+        dashboard and intelligent tools have significantly reduced our
+        administrative burden, allowing our clinicians to focus more on patient
+        care. The integration with our existing systems was seamless, and the
+        security features give us peace of mind knowing our data is protected.
+    </Testimonial>
+    <StickyTabs tabs={["Tab 1", "Tab 2", "Tab 3"]} activeTab="Tab 1">
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Aenean eu justo vel massa aliquam varius. Sed tempor lobortis
+            mattis. In ut libero tincidunt, dapibus tortor eu, faucibus nisi.
+            Aliquam dignissim commodo libero ut dapibus. Pellentesque nec
+            finibus velit. Ut metus augue, lobortis eget augue maximus,
+            venenatis suscipit nibh. Sed at scelerisque odio, vitae pellentesque
+            odio. Ut tortor ligula, semper in velit sit amet, ultrices sagittis
+            nulla. Vivamus condimentum ante non consectetur tristique. Sed sit
+            amet lectus laoreet, eleifend sapien vel, tempus risus. Cras lacinia
+            mi a mauris rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin
+            est et, auctor dui. Vestibulum ante ipsum primis in faucibus orci
+            luctus et ultrices posuere cubilia curae; Nam quis nibh egestas,
+            aliquam quam eget, lacinia nunc. Sed nec elit metus. Donec feugiat
+            elementum convallis. Phasellus vitae faucibus mauris. Nam tempor,
+            nulla sit amet varius euismod, arcu dui tincidunt felis, a fermentum
+            lacus odio euismod elit. Integer enim mi, accumsan sed ante a,
+            molestie ultricies dolor. Pellentesque varius ut sapien vel
+            consectetur. Suspendisse molestie aliquet neque, quis facilisis
+            justo faucibus vitae. Morbi tempor lacus a tincidunt condimentum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+            lacinia quam ac nisl ornare, eget molestie est pretium. Sed iaculis
+            viverra orci facilisis convallis. Pellentesque ipsum ligula,
+            ultricies non volutpat quis, egestas non nisi. Mauris tempor mattis
+            arcu non consectetur. Fusce accumsan viverra eros sit amet molestie.
+            Quisque quis nibh fermentum, aliquam sem et, posuere enim. Proin
+            faucibus eros eget aliquam egestas. Vestibulum a auctor lorem, et
+            maximus dui. Etiam gravida commodo nunc eget ultrices. Praesent
+            efficitur odio vitae magna ullamcorper, ut pellentesque velit
+            faucibus. Nunc at turpis vitae elit tincidunt accumsan. Vivamus ac
+            turpis odio. Fusce id feugiat tellus. Nullam non accumsan nisl.
+            Maecenas non elementum nisl, at elementum tortor. Orci varius
+            natoque penatibus et magnis dis parturient montes, nascetur
+            ridiculus mus. Nullam posuere tristique tellus, sit amet tincidunt
+            tellus tempor eget. Proin eleifend est non nibh auctor, vitae
+            placerat lacus cursus. Vivamus nec ultricies erat, ac facilisis
+            libero. Suspendisse tempor libero a porttitor accumsan. Fusce
+            malesuada, libero nec sollicitudin rutrum, ipsum enim ultrices
+            tellus, euismod auctor massa nulla vel erat. Donec tincidunt
+            placerat consequat. Maecenas purus lorem, vehicula eu tempus et,
+            ultricies quis massa. Vestibulum eu tortor ipsum. Aenean facilisis
+            nec lorem at semper. Donec scelerisque neque sapien, at auctor ex
+            tincidunt eget. Nulla dapibus diam sit amet pretium ullamcorper.
+            Aenean dapibus faucibus orci at vestibulum.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum.
+        </div>
+    </StickyTabs>
+    <Tabs tabs={["Tab A", "Tab B", "Tab C"]} activeTab="Tab A">
+        <Tab name="Tab A">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum.
+        </Tab>
+        <Tab name="Tab B"
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum.</Tab
+        >
+        <Tab name="Tab C"
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu
+            justo vel massa aliquam varius. Sed tempor lobortis mattis. In ut
+            libero tincidunt, dapibus tortor eu, faucibus nisi. Aliquam
+            dignissim commodo libero ut dapibus. Pellentesque nec finibus velit.
+            Ut metus augue, lobortis eget augue maximus, venenatis suscipit
+            nibh. Sed at scelerisque odio, vitae pellentesque odio. Ut tortor
+            ligula, semper in velit sit amet, ultrices sagittis nulla. Vivamus
+            condimentum ante non consectetur tristique. Sed sit amet lectus
+            laoreet, eleifend sapien vel, tempus risus. Cras lacinia mi a mauris
+            rutrum hendrerit. Curabitur eu arcu rutrum, sollicitudin est et,
+            auctor dui. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Nam quis nibh egestas, aliquam quam
+            eget, lacinia nunc. Sed nec elit metus. Donec feugiat elementum
+            convallis. Phasellus vitae faucibus mauris. Nam tempor, nulla sit
+            amet varius euismod, arcu dui tincidunt felis, a fermentum lacus
+            odio euismod elit. Integer enim mi, accumsan sed ante a, molestie
+            ultricies dolor. Pellentesque varius ut sapien vel consectetur.
+            Suspendisse molestie aliquet neque, quis facilisis justo faucibus
+            vitae. Morbi tempor lacus a tincidunt condimentum. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Maecenas lacinia quam ac nisl
+            ornare, eget molestie est pretium. Sed iaculis viverra orci
+            facilisis convallis. Pellentesque ipsum ligula, ultricies non
+            volutpat quis, egestas non nisi. Mauris tempor mattis arcu non
+            consectetur. Fusce accumsan viverra eros sit amet molestie. Quisque
+            quis nibh fermentum, aliquam sem et, posuere enim. Proin faucibus
+            eros eget aliquam egestas. Vestibulum a auctor lorem, et maximus
+            dui. Etiam gravida commodo nunc eget ultrices. Praesent efficitur
+            odio vitae magna ullamcorper, ut pellentesque velit faucibus. Nunc
+            at turpis vitae elit tincidunt accumsan. Vivamus ac turpis odio.
+            Fusce id feugiat tellus. Nullam non accumsan nisl. Maecenas non
+            elementum nisl, at elementum tortor. Orci varius natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus. Nullam
+            posuere tristique tellus, sit amet tincidunt tellus tempor eget.
+            Proin eleifend est non nibh auctor, vitae placerat lacus cursus.
+            Vivamus nec ultricies erat, ac facilisis libero. Suspendisse tempor
+            libero a porttitor accumsan. Fusce malesuada, libero nec
+            sollicitudin rutrum, ipsum enim ultrices tellus, euismod auctor
+            massa nulla vel erat. Donec tincidunt placerat consequat. Maecenas
+            purus lorem, vehicula eu tempus et, ultricies quis massa. Vestibulum
+            eu tortor ipsum. Aenean facilisis nec lorem at semper. Donec
+            scelerisque neque sapien, at auctor ex tincidunt eget. Nulla dapibus
+            diam sit amet pretium ullamcorper. Aenean dapibus faucibus orci at
+            vestibulum.</Tab
+        >
+    </Tabs>
+    <Accordion
+        label="Example Accordion Label 01"
+        group="accordion-01"
+        expanded="true"
+    >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu justo
+        vel massa aliquam varius. Sed tempor lobortis mattis. In ut libero
+        tincidunt, dapibus tortor eu, faucibus nisi. Aliquam dignissim commodo
+        libero ut dapibus. Pellentesque nec finibus velit. Ut metus augue,
+        lobortis eget augue maximus, venenatis suscipit nibh. Sed at scelerisque
+        odio, vitae pellentesque odio. Ut tortor ligula, semper in velit sit
+        amet, ultrices sagittis nulla.
+    </Accordion>
+
+    <Accordion
+        label="Example Accordion Label 02"
+        group="accordion-01"
+        expanded="false"
+    >
+        Etiam gravida commodo nunc eget ultrices. Praesent efficitur odio vitae
+        magna ullamcorper, ut pellentesque velit faucibus. Nunc at turpis vitae
+        elit tincidunt accumsan. Vivamus ac turpis odio. Fusce id feugiat
+        tellus. Nullam non accumsan nisl. Maecenas non elementum nisl, at
+        elementum tortor.
+    </Accordion>
+</Section>

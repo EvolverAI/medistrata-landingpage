@@ -1,0 +1,167 @@
+/* CustomButton Styles */
+
+.custom-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #2196f3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* Creative Fill Effect */
+.creative-fill {
+    background: linear-gradient(45deg, #2196f3, #21cbf3);
+}
+
+.creative-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #21cbf3, #2196f3);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.creative-fill:hover::before {
+    left: 0;
+}
+
+/* Magnetic Effect */
+.magnetic {
+    transition: transform 0.3s ease;
+}
+
+.magnetic:hover {
+    animation: magnetic 0.6s ease-in-out;
+}
+
+@keyframes magnetic {
+
+    0%,
+    100% {
+        transform: translateY(-2px) scale(1);
+    }
+
+    25% {
+        transform: translateY(-4px) scale(1.05);
+    }
+
+    50% {
+        transform: translateY(-6px) scale(1.1);
+    }
+
+    75% {
+        transform: translateY(-4px) scale(1.05);
+    }
+}
+
+/* Text Flip Effect */
+.text-flip {
+    perspective: 1000px;
+}
+
+.text-flip .button-text {
+    display: inline-block;
+    transition: transform 0.6s;
+}
+
+.text-flip .button-text::before {
+    content: attr(data-flip);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+    transition: transform 0.6s;
+}
+
+.text-flip:hover .button-text {
+    transform: rotateX(-90deg);
+}
+
+.text-flip:hover .button-text::before {
+    transform: rotateX(0deg);
+}
+
+/* Magnetic Text Flip Effect */
+.magnetic-text-flip {
+    perspective: 1000px;
+    transition: transform 0.3s ease;
+}
+
+.magnetic-text-flip:hover {
+    animation: magnetic 0.6s ease-in-out;
+}
+
+.magnetic-text-flip .button-text {
+    display: inline-block;
+    transition: transform 0.6s;
+}
+
+.magnetic-text-flip .button-text::before {
+    content: attr(data-flip);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+    transition: transform 0.6s;
+}
+
+.magnetic-text-flip:hover .button-text {
+    transform: rotateX(-90deg);
+}
+
+.magnetic-text-flip:hover .button-text::before {
+    transform: rotateX(0deg);
+}
+
+/* Effect Color Accent */
+.effect-color-accent .creative-fill,
+.effect-color-accent .magnetic,
+.effect-color-accent .text-flip,
+.effect-color-accent .magnetic-text-flip {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+}
+
+.effect-color-accent .creative-fill::before {
+    background: linear-gradient(45deg, #feca57, #ff6b6b);
+}
+
+.effect-color-accent .text-flip .button-text::before,
+.effect-color-accent .magnetic-text-flip .button-text::before {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+}

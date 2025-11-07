@@ -1,0 +1,153 @@
+.about-content {
+			max-width: 900px;
+			margin: 0 auto;
+		}
+
+		.lead-text {
+			font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+			line-height: 1.75;
+			color: var(--muted);
+			margin-bottom: 1.25rem;
+		}
+
+		.features-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 1.5rem;
+			margin-top: 2rem;
+		}
+
+		.benefits-list {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.benefit-item {
+			display: flex;
+			gap: 1.5rem;
+			align-items: flex-start;
+		}
+
+		.benefit-number {
+			font-size: 2rem;
+			font-weight: 800;
+			color: var(--accent);
+			opacity: 0.28;
+			line-height: 1;
+			flex-shrink: 0;
+		}
+
+		.benefit-content h3 {
+			font-size: 1.25rem;
+			font-weight: 700;
+			margin: 0 0 0.5rem 0;
+			color: var(--text);
+		}
+
+		.benefit-content p {
+			font-size: 0.98rem;
+			line-height: 1.7;
+			color: var(--muted);
+			margin: 0;
+		}
+
+		.tech-content {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 3rem;
+			margin-top: 2rem;
+		}
+
+		.tech-category {
+			text-align: left;
+		}
+
+		.tech-category h3 {
+			font-size: 1.125rem;
+			font-weight: 800;
+			margin: 0 0 1rem 0;
+			color: var(--text);
+			text-align: center;
+			letter-spacing: 0.01em;
+		}
+
+		.tech-category ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.tech-category li {
+			padding: 0.625rem 0;
+			color: var(--muted);
+			font-size: 0.98rem;
+			border-bottom: 1px solid var(--line);
+		}
+
+		.tech-category li:last-child {
+			border-bottom: none;
+		}
+
+		.tech-category li::before {
+			content: "✓";
+			color: var(--accent);
+			font-weight: 800;
+			margin-right: 0.6rem;
+		}
+
+		.footer {
+			background: #0f1113;
+			color: #ffffff;
+			padding: 3rem 2rem;
+			text-align: center;
+		}
+
+		.footer-content {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.footer-content p {
+			margin: 0.5rem 0;
+			font-size: 0.9375rem;
+		}
+
+		.footer-tagline {
+			color: #999;
+			font-size: 0.875rem !important;
+		}
+
+		@media (max-width: 768px) {
+			.lead-text {
+				font-size: 1.0625rem;
+			}
+
+			.features-grid {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+			}
+
+			.benefits-list {
+				grid-template-columns: 1fr;
+				gap: 2rem;
+			}
+
+			.benefit-number {
+				font-size: 2rem;
+			}
+
+			.benefit-content h3 {
+				font-size: 1.25rem;
+			}
+
+			.tech-content {
+				grid-template-columns: 1fr;
+				gap: 2rem;
+			}
+
+			.footer {
+				padding: 2rem 1.5rem;
+			}
+		}

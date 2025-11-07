@@ -1,0 +1,30 @@
+---
+import Section from "../Section.astro";
+import medistrataIntro from "../../assets/medistrata-intro.png";
+import "../../styles/general.css";
+---
+
+<!-- Vision Section -->
+<Section
+    id="vision"
+    title="Vision"
+    titleAlignment="left"
+    centered={true}
+    image={medistrataIntro.src}
+    imagePosition="right"
+    imageSize="640px"
+>
+    <div class="vision-content">
+        <p class="lead-text">
+            We envision a healthcare world where data works seamlessly for
+            people — not the other way around. A world where every clinician,
+            nurse, and administrator can instantly access the information they
+            need, in context, with clarity.
+        </p>
+        <p class="lead-text">
+            At MediStrata, we believe that by transforming how medical data is
+            organized, understood, and used, we can make care faster, more
+            accurate, and profoundly more human.
+        </p>
+    </div>
+</Section>

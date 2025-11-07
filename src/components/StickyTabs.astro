@@ -1,0 +1,119 @@
+---
+const { tabs } = Astro.props;
+---
+
+<div class="sticky-tabs" data-tabs={JSON.stringify(tabs)}>
+    <div class="tab-buttons"></div>
+    <div class="sections">
+        <slot />
+    </div>
+</div>
+
+<style>
+    .sticky-tabs {
+        position: relative;
+        margin: 2rem 0;
+    }
+
+    .tab-buttons {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    :global(.tab-button) {
+        flex: 1;
+        padding: 1.5rem 1rem;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    :global(.tab-button:not(:last-child)) {
+        border-right: none;
+    }
+
+    :global(.tab-button:hover) {
+        background-color: #f0f0f0;
+    }
+
+    :global(.tab-button.active) {
+        background-color: #2196f3;
+        color: #fff;
+        border-color: #2196f3;
+    }
+
+    .sections {
+        position: relative;
+    }
+
+    :global(.section) {
+        padding: 2rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    :global(.section:last-child) {
+        border-bottom: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const containers = document.querySelectorAll(".sticky-tabs");
+        containers.forEach((container) => {
+            const tabButtons = container.querySelector(".tab-buttons");
+            const sectionsContainer = container.querySelector(".sections");
+            const sections = Array.from(sectionsContainer.children);
+            const tabs = container.dataset.tabs
+                ? JSON.parse(container.dataset.tabs)
+                : sections.map((_, i) => `Tab ${i + 1}`);
+
+            // Add class to sections for styling
+            sections.forEach((section) => {
+                section.classList.add("section");
+            });
+
+            // Create tab buttons
+            tabs.forEach((tabName, index) => {
+                const button = document.createElement("button");
+                button.textContent = tabName;
+                button.classList.add("tab-button");
+                button.addEventListener("click", () => {
+                    sections[index].scrollIntoView({ behavior: "smooth" });
+                });
+                tabButtons.appendChild(button);
+            });
+
+            // Set up intersection observer for scrollspy
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const index = sections.indexOf(entry.target);
+                            const buttons =
+                                tabButtons.querySelectorAll(".tab-button");
+                            buttons.forEach((btn, i) => {
+                                btn.classList.toggle("active", i === index);
+                            });
+                        }
+                    });
+                },
+                { threshold: 0.5 },
+            );
+
+            sections.forEach((section) => observer.observe(section));
+        });
+    });
+</script>

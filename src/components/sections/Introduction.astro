@@ -1,0 +1,30 @@
+---
+import Section from "../Section.astro";
+import medistrataIntro from "../../assets/medistrata-intro.png";
+import "../../styles/general.css";
+---
+
+<!-- Introduction Section -->
+<Section
+    id="introduction"
+    title="Introduction"
+    titleAlignment="left"
+    centered={true}
+    image={medistrataIntro.src}
+    imagePosition="left"
+    imageSize="640px"
+>
+    <div class="introduction-content">
+        <p class="lead-text">
+            Every day, clinics spend valuable time navigating multiple systems
+            to find essential patient information. MediStrata unifies these data
+            sources into a single, intelligent dashboard — presenting what
+            matters most, when it matters most.
+        </p>
+        <p class="lead-text">
+            Alongside the dashboard, MediStrata provides smart tools that save
+            time, increase accuracy, and automate routine documentation —
+            allowing clinicians to focus on what truly counts: the patient.
+        </p>
+    </div>
+</Section>

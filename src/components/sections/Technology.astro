@@ -1,0 +1,52 @@
+---
+import Section from "../Section.astro";
+import "../../styles/tech.css";
+---
+
+<!-- Technology Section -->
+<Section
+    id="technology"
+    title="Technology Stack"
+    subtitle="Built on modern, proven technologies"
+    background="light"
+    centered={true}
+>
+    <div class="tech-content">
+        <div class="tech-category">
+            <h3>Infrastructure</h3>
+            <ul>
+                <li>Kubernetes-orchestrated microservices</li>
+                <li>Multi-region cloud deployment</li>
+                <li>Auto-scaling and load balancing</li>
+                <li>99.99% uptime SLA</li>
+            </ul>
+        </div>
+        <div class="tech-category">
+            <h3>Data & Analytics</h3>
+            <ul>
+                <li>Real-time data processing pipelines</li>
+                <li>Advanced machine learning models</li>
+                <li>FHIR-compliant data standards</li>
+                <li>Distributed data lakes</li>
+            </ul>
+        </div>
+        <div class="tech-category">
+            <h3>Security</h3>
+            <ul>
+                <li>End-to-end encryption (AES-256)</li>
+                <li>Multi-factor authentication</li>
+                <li>Regular security audits</li>
+                <li>SOC 2 Type II certified</li>
+            </ul>
+        </div>
+        <div class="tech-category">
+            <h3>Integration</h3>
+            <ul>
+                <li>RESTful & GraphQL APIs</li>
+                <li>HL7 & FHIR support</li>
+                <li>Custom connector development</li>
+                <li>Real-time data synchronization</li>
+            </ul>
+        </div>
+    </div>
+</Section>

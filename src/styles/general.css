@@ -1,0 +1,14 @@
+/* General Styles for the Landing Page */
+
+.lead-text {
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .lead-text {
+        font-size: 1.0625rem;
+    }
+}

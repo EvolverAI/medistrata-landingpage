@@ -1,0 +1,57 @@
+/* Benefits Section Styles */
+
+.benefits-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.benefit-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.28;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.benefit-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text);
+}
+
+.benefit-content p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .benefits-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .benefit-number {
+        font-size: 2rem;
+    }
+
+    .benefit-content h3 {
+        font-size: 1.25rem;
+    }
+
+
+}

@@ -1,0 +1,47 @@
+---
+const { type = "info", title } = Astro.props;
+---
+
+<div class={`notice notice-${type}`}>
+    {title && <h3 class="notice-title">{title}</h3>}
+    <p class="notice-message">
+        <slot />
+    </p>
+</div>
+
+<style>
+    .notice {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        border-left: 4px solid;
+    }
+
+    .notice-info {
+        background-color: #e3f2fd;
+        border-left-color: #2196f3;
+        color: #0d47a1;
+    }
+
+    .notice-warning {
+        background-color: #fff3e0;
+        border-left-color: #ff9800;
+        color: #e65100;
+    }
+
+    .notice-success {
+        background-color: #e8f5e8;
+        border-left-color: #4caf50;
+        color: #1b5e20;
+    }
+
+    .notice-title {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .notice-message {
+        margin: 0;
+    }
+</style>

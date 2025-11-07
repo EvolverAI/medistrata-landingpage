@@ -1,0 +1,30 @@
+/* Footer Styles */
+
+.footer {
+    background: #0f1113;
+    color: #ffffff;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 0.5rem 0;
+    font-size: 0.9375rem;
+}
+
+.footer-tagline {
+    color: #999;
+    font-size: 0.875rem !important;
+}
+
+@media (max-width: 768px) {
+
+    .footer {
+        padding: 2rem 1.5rem;
+    }
+}

@@ -1,0 +1,99 @@
+---
+const {
+    customerImage,
+    customerName,
+    customerRole,
+    customerCompanyLogo,
+    customerCompanyName,
+} = Astro.props;
+---
+
+<div class="testimonial">
+    <img src={customerImage} alt={customerName} class="customer-image" />
+    <div class="testimonial-content">
+        <blockquote class="testimonial-text">
+            <slot />
+        </blockquote>
+        <div class="customer-info">
+            <p class="customer-name">{customerName}</p>
+            <p class="customer-role">{customerRole}</p>
+            <img
+                src={customerCompanyLogo}
+                alt={customerCompanyName}
+                class="company-logo"
+            />
+            <p class="company-name">{customerCompanyName}</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .testimonial {
+        display: flex;
+        align-items: flex-start;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+
+    .customer-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .testimonial-content {
+        flex: 1;
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        color: #333;
+        margin: 0 0 1rem 0;
+        position: relative;
+        padding-left: 1rem;
+    }
+
+    .testimonial-text::before {
+        content: '"';
+        font-size: 2rem;
+        color: #2196f3;
+        position: absolute;
+        left: 0;
+        top: -0.5rem;
+    }
+
+    .customer-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .customer-name {
+        font-weight: bold;
+        margin: 0;
+        color: #333;
+    }
+
+    .customer-role {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .company-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    .company-name {
+        font-weight: bold;
+        margin: 0;
+        color: #333;
+    }
+</style>

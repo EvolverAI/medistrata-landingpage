@@ -1,0 +1,56 @@
+/* Technology Section Styles */
+
+.tech-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.tech-category {
+    text-align: left;
+}
+
+.tech-category h3 {
+    font-size: 1.125rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
+.tech-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tech-category li {
+    padding: 0.625rem 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.tech-category li:last-child {
+    border-bottom: none;
+}
+
+.tech-category li::before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: 800;
+    margin-right: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    .tech-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer {
+        padding: 2rem 1.5rem;
+    }
+}

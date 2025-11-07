@@ -1,0 +1,37 @@
+---
+import Section from "../Section.astro";
+import medistrataIntro from "../../assets/medistrata-intro.png";
+import "../../styles/general.css";
+---
+
+<!-- Mission Section -->
+<Section
+    id="mission"
+    title="Mission"
+    titleAlignment="right"
+    centered={true}
+    image={medistrataIntro.src}
+    imagePosition="right"
+    imageSize="640px"
+>
+    <div class="mission-content">
+        <p class="lead-text">
+            Our mission is to make healthcare operations as intelligent and
+            efficient as the data that powers them — helping clinicians and
+            staff focus their time where it matters most: on care.
+        </p>
+        <p class="lead-text">
+            Healthcare professionals are surrounded by data but short on time.
+            MediStrata automates the complexity behind clinical information,
+            transforming scattered inputs into clear, structured insight. By
+            reducing administrative burden and accelerating decision-making, we
+            give clinicians more time to focus on care — improving both outcomes
+            and efficiency.
+        </p>
+        <p class="lead-text">
+            Through intelligent data management and user-centric design, we aim
+            to revolutionize healthcare operations — making them faster,
+            simpler, and more effective for everyone involved.
+        </p>
+    </div>
+</Section>
