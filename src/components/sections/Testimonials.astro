@@ -1,0 +1,33 @@
+---
+import Testimonial from "@/components/Testimonial.astro";
+import Section from "@/components/Section.astro";
+---
+
+<Section id="what-clients-say" title="What Our Clients Say" centered={true}>
+    <div class="testimonials-grid">
+        <Testimonial
+            customerName="Jane Doe"
+            customerTitle="CEO, Acme Corp"
+            customerImage="/images/testimonials/jane-doe.jpg"
+        >
+            MediStrata has transformed our data management processes. The
+            platform is intuitive and powerful.
+        </Testimonial>
+        <Testimonial
+            customerName="John Smith"
+            customerTitle="CTO, BetaTech"
+            customerImage="/images/testimonials/john-smith.jpg"
+        >
+            The integration was seamless, and the support team has been
+            fantastic. Highly recommend MediStrata!
+        </Testimonial>
+        <Testimonial
+            customerName="Alice Johnson"
+            customerTitle="Data Analyst, Gamma Solutions"
+            customerImage="/images/testimonials/alice-johnson.jpg"
+        >
+            With MediStrata, we've improved our data accuracy and efficiency
+            significantly. It's a game-changer.
+        </Testimonial>
+    </div>
+</Section>
